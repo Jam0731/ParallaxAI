@@ -3,6 +3,8 @@
 > **Multi-agent collaboration gateway for one-person companies.**
 > Route messages to specialized AI agents with shared memory, session persistence, and cost tracking.
 
+**English** | [中文](README_zh.md)
+
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.x-blue.svg)](https://www.typescriptlang.org/)
 [![React](https://img.shields.io/badge/React-19-blue.svg)](https://reactjs.org/)
