@@ -36,3 +36,7 @@ logs/
 # Backup files
 *.tar.gz
 *.backup
+
+# Internal docs
+docs/
+STATUS.md
