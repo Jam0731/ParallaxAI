@@ -1,0 +1,47 @@
+{
+  "version": 1,
+  "skills": {
+    "deploy-pilot": {
+      "name": "Deploy Pilot",
+      "zip_url": "https://api.skillhub.cn/api/v1/download?slug=deploy-pilot",
+      "source": "community",
+      "version": "0.1.2",
+      "installedAt": "2026-06-16T09:33:13Z"
+    },
+    "docker": {
+      "name": "Docker",
+      "zip_url": "https://api.skillhub.cn/api/v1/download?slug=docker",
+      "source": "community",
+      "version": "1.0.4",
+      "installedAt": "2026-06-16T09:33:15Z"
+    },
+    "market-research": {
+      "name": "Market Research",
+      "zip_url": "https://api.skillhub.cn/api/v1/download?slug=market-research",
+      "source": "community",
+      "version": "1.0.1",
+      "installedAt": "2026-06-16T09:33:18Z"
+    },
+    "google-trends": {
+      "name": "Google Trends",
+      "zip_url": "https://api.skillhub.cn/api/v1/download?slug=google-trends",
+      "source": "community",
+      "version": "1.0.0",
+      "installedAt": "2026-06-16T09:33:21Z"
+    },
+    "security-audit": {
+      "name": "Security Audit",
+      "zip_url": "https://api.skillhub.cn/api/v1/download?slug=security-audit",
+      "source": "community",
+      "version": "1.0.0",
+      "installedAt": "2026-06-16T09:33:23Z"
+    },
+    "eslint-config-generator": {
+      "name": "ESLint Config Generator",
+      "zip_url": "https://api.skillhub.cn/api/v1/download?slug=eslint-config-generator",
+      "source": "community",
+      "version": "1.0.0",
+      "installedAt": "2026-06-16T09:33:25Z"
+    }
+  }
+}

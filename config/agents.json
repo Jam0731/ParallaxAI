@@ -1,0 +1,28 @@
+{
+  "roles": {
+    "munger": {
+      "name": "Munger",
+      "skill": "skills/munger/SKILL.md",
+      "preferred": "mimo",
+      "fallback": ["claude", "reasonix"]
+    },
+    "woz": {
+      "name": "Woz",
+      "skill": "skills/woz/SKILL.md",
+      "preferred": "claude",
+      "fallback": ["mimo", "reasonix"]
+    },
+    "ogilvy": {
+      "name": "Ogilvy",
+      "skill": "skills/ogilvy/SKILL.md",
+      "preferred": "mimo",
+      "fallback": ["claude"]
+    },
+    "taleb": {
+      "name": "Taleb",
+      "skill": "skills/taleb/SKILL.md",
+      "preferred": "mimo",
+      "fallback": ["claude", "reasonix"]
+    }
+  }
+}
