@@ -1,7 +1,8 @@
 import { spawn, execSync, type ChildProcess } from "child_process"
 import { randomUUID } from "crypto"
-import { join } from "path"
+import { join, dirname } from "path"
 import { existsSync, readFileSync } from "fs"
+import { fileURLToPath } from "url"
 import { EventEmitter } from "events"
 import type {
   AgentAdapter, AgentChunk, AgentResponse, AgentTask,
@@ -149,13 +150,18 @@ export class ClaudeAdapter extends EventEmitter implements AgentAdapter {
   }
 
   private loadSkillContent(agentId: string): string | undefined {
-    const skillPath = join(process.cwd(), "agent-configs", agentId, "SKILL.md")
+    const skillPath = join(this.getProjectDir(), "agent-configs", agentId, "SKILL.md")
     if (!existsSync(skillPath)) return undefined
     try {
       return readFileSync(skillPath, "utf-8")
     } catch {
       return undefined
     }
+  }
+
+  private getProjectDir(): string {
+    const __dirname = dirname(fileURLToPath(import.meta.url))
+    return join(__dirname, "..", "..")
   }
 
   async cancel(): Promise<void> {

@@ -14,6 +14,7 @@ import { createRoleRouter } from "./roles.js"
 const PROJECT_DIR = join(homedir(), "workspace", "ParallaxAI")
 const DATA_DIR = process.env.PARALLAX_DATA_DIR ?? join(homedir(), ".parallaxai")
 const PORT = parseInt(process.env.PARALLAX_PORT ?? "46446")
+const AGENT_CONFIGS_DIR = join(PROJECT_DIR, "agent-configs")
 const SHARED_MEMORY_DIR = join(PROJECT_DIR, "shared_memory")
 
 async function main() {
@@ -41,7 +42,7 @@ async function main() {
   const store = new Store(DATA_DIR)
 
   // Initialize context manager
-  const context = new ContextManager(SHARED_MEMORY_DIR, DATA_DIR)
+  const context = new ContextManager(AGENT_CONFIGS_DIR, SHARED_MEMORY_DIR, DATA_DIR)
 
   // Initialize adapter registry
   console.log("\n🔍 Detecting agents...")

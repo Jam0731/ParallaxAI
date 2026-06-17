@@ -53,6 +53,10 @@ export function useGateway(url: string) {
   const [costSummary, setCostSummary] = useState<{
     today: { totalUsd: number; totalTokens: number }
   }>({ today: { totalUsd: 0, totalTokens: 0 } })
+  const [delegationProposal, setDelegationProposal] = useState<{
+    conversationId: string
+    delegations: Array<{ target: string; task: string }>
+  } | null>(null)
 
   // Keep ref in sync
   useEffect(() => {
@@ -191,6 +195,13 @@ export function useGateway(url: string) {
       case 'cron_runs':
         if (msg.runs) setCronRuns(msg.runs)
         break
+
+      case 'delegation_proposal':
+        setDelegationProposal({
+          conversationId: msg.conversationId,
+          delegations: msg.delegations,
+        })
+        break
     }
   }, []) // No dependencies — all state setters are stable
 
@@ -235,9 +246,27 @@ export function useGateway(url: string) {
     setConversationId(id)
     setMessages([])
     setStreaming(null)
+    setDelegationProposal(null)
     if (wsRef.current?.readyState === WebSocket.OPEN) {
       wsRef.current.send(JSON.stringify({ type: 'conversation_select', conversationId: id }))
     }
+  }, [])
+
+  const deleteConversation = useCallback((id: string) => {
+    if (!wsRef.current || wsRef.current.readyState !== WebSocket.OPEN) return
+    wsRef.current.send(JSON.stringify({ type: 'conversation_delete', conversationId: id }))
+    if (id === conversationIdRef.current) {
+      const newId = `conv-${Date.now()}`
+      conversationIdRef.current = newId
+      setConversationId(newId)
+      setMessages([])
+      setStreaming(null)
+    }
+  }, [])
+
+  const renameConversation = useCallback((id: string, title: string) => {
+    if (!wsRef.current || wsRef.current.readyState !== WebSocket.OPEN) return
+    wsRef.current.send(JSON.stringify({ type: 'conversation_rename', conversationId: id, title }))
   }, [])
 
   const cancel = useCallback(() => {
@@ -285,14 +314,36 @@ export function useGateway(url: string) {
     wsRef.current.send(JSON.stringify({ type: 'cron_run', jobId }))
   }, [])
 
+  const approveDelegation = useCallback((delegations: Array<{ target: string; task: string }>) => {
+    if (!wsRef.current || wsRef.current.readyState !== WebSocket.OPEN) return
+    wsRef.current.send(JSON.stringify({
+      type: 'delegation_approve',
+      conversationId: conversationIdRef.current,
+      delegations,
+    }))
+    setDelegationProposal(null)
+  }, [])
+
+  const rejectDelegation = useCallback((userMessage: string) => {
+    if (!wsRef.current || wsRef.current.readyState !== WebSocket.OPEN) return
+    wsRef.current.send(JSON.stringify({
+      type: 'delegation_reject',
+      conversationId: conversationIdRef.current,
+      userMessage,
+    }))
+    setDelegationProposal(null)
+  }, [])
+
   return {
     connected, messages, agents, streaming, send, cancel,
     workspaces, activeWorkspace, conversationId, conversations,
     switchWorkspace, createWorkspace, newConversation, switchConversation,
+    deleteConversation, renameConversation,
     delegationTasks, refreshDelegationTasks,
     cronJobs, cronRuns, refreshCronData,
     costSummary, refreshCostSummary,
     setMessages,
     addCronJob, removeCronJob, toggleCronJob, runCronJob,
+    delegationProposal, approveDelegation, rejectDelegation,
   }
 }

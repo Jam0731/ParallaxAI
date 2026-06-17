@@ -170,6 +170,7 @@ export interface RoutingDecision {
 
 // ── Context ──
 export interface ContextBundle {
+  agentPersona?: string        // AGENTS.md content
   sharedContext?: string       // 统一共享上下文（shared_context.json）
   conversationSummary?: string
   crossAgentContext?: string
@@ -221,6 +222,8 @@ export type ClientMessage =
   | { type: "conversation_list" }
   | { type: "conversation_history"; conversationId: string }
   | { type: "conversation_select"; conversationId: string }
+  | { type: "conversation_delete"; conversationId: string }
+  | { type: "conversation_rename"; conversationId: string; title: string }
   | { type: "delegation_tasks"; limit?: number }
   | { type: "cron_jobs" }
   | { type: "cron_runs"; jobId?: string; limit?: number }
@@ -229,6 +232,8 @@ export type ClientMessage =
   | { type: "cron_remove"; jobId: string }
   | { type: "cron_toggle"; jobId: string; enabled: boolean }
   | { type: "cron_run"; jobId: string }
+  | { type: "delegation_approve"; conversationId: string; delegations: Array<{ target: AgentId; task: string }> }
+  | { type: "delegation_reject"; conversationId: string; userMessage: string }
 
 export type ServerMessage =
   | { type: "chat_start"; conversationId: string; messageId: string; agentId: AgentId }
@@ -240,6 +245,7 @@ export type ServerMessage =
   | { type: "chat_error"; messageId: string; error: string; recoverable: boolean }
   | { type: "agent_status"; agentId: AgentId; status: AgentStatus }
   | { type: "cost_update"; agentId: AgentId; cost: CostEntry }
+  | { type: "delegation_proposal"; conversationId: string; delegations: Array<{ target: AgentId; task: string }> }
   | { type: "pong" }
   | { type: "error"; message: string; code: string }
   | { type: "conversation_list"; conversations: Conversation[] }

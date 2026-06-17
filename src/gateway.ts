@@ -91,7 +91,7 @@ export class Gateway {
     })
   }
 
-  private handleClientMessage(clientId: string, msg: ClientMessage): void {
+  private async handleClientMessage(clientId: string, msg: ClientMessage): Promise<void> {
     switch (msg.type) {
       case "chat":
         this.handleChat(clientId, msg.content, msg.conversationId)
@@ -149,11 +149,7 @@ export class Gateway {
           const convId = (msg as any).conversationId
           const conv = this.store.getConversation(convId)
           
-          // Only switch workspace if conversation explicitly belongs to a different workspace
-          // Old conversations (backfilled) should NOT trigger a switch
           if (conv?.workspaceId && conv.workspaceId !== this.workspaceManager.getActiveId()) {
-            // Check if this workspace_id was set at creation time (not backfilled)
-            // by checking if any session_mapping has this workspace_id for this conversation
             const hasExplicitWs = this.store.db.prepare(
               "SELECT 1 FROM session_mappings WHERE conversation_id = ? AND workspace_id = ? LIMIT 1"
             ).get(convId, conv.workspaceId)
@@ -168,6 +164,25 @@ export class Gateway {
           
           const messages = this.store.getMessages(convId)
           this.sendToClient(clientId, { type: "conversation_history", conversationId: convId, messages } as any)
+        }
+        break
+      case "conversation_delete":
+        {
+          const delId = (msg as any).conversationId
+          this.store.deleteConversation(delId)
+          const conversations = this.store.listConversations()
+          this.sendToClient(clientId, { type: "conversation_list", conversations } as any)
+        }
+        break
+      case "conversation_rename":
+        {
+          const renId = (msg as any).conversationId
+          const newTitle = (msg as any).title
+          if (renId && newTitle) {
+            this.store.renameConversation(renId, newTitle)
+            const conversations = this.store.listConversations()
+            this.sendToClient(clientId, { type: "conversation_list", conversations } as any)
+          }
         }
         break
       case "delegation_tasks":
@@ -235,6 +250,30 @@ export class Gateway {
               this.sendToClient(clientId, { type: "cron_jobs", jobs } as any)
               this.sendToClient(clientId, { type: "cron_runs", runs } as any)
             })
+          }
+        }
+        break
+      case "delegation_approve":
+        {
+          const convId = (msg as any).conversationId
+          const delegations = (msg as any).delegations as Array<{ target: AgentId; task: string }>
+          if (delegations && delegations.length > 0) {
+            // Execute approved delegations sequentially
+            for (const delegation of delegations) {
+              this.loopDetector.incrementDepth(convId)
+              await this.executeAgentTurn(clientId, convId, delegation.target, delegation.task, "munger")
+            }
+            this.loopDetector.resetDepth(convId)
+          }
+        }
+        break
+      case "delegation_reject":
+        {
+          const convId = (msg as any).conversationId
+          const userMsg = (msg as any).userMessage
+          if (userMsg) {
+            // User wants to continue talking to Munger — send their message as a follow-up
+            await this.handleChat(clientId, userMsg, convId)
           }
         }
         break
@@ -377,7 +416,7 @@ export class Gateway {
       conversationId,
       abort: () => {
         cancelled = true
-        adapter?.cancel().catch(() => {})
+        try { adapter?.cancel() } catch {}
       },
     })
 
@@ -408,17 +447,33 @@ export class Gateway {
       }
 
       // Execute with error recovery
-      // Use conversation's workspace for workDir, not the currently active workspace
       const convWsId = this.store.getConversationWorkspace(conversationId)
       const convWorkspace = convWsId ? this.store.getWorkspace(convWsId) : this.workspaceManager.getActive()
-      const result = await this.errorHandler.executeWithRetry(agentId, {
+      let result = await this.errorHandler.executeWithRetry(agentId, {
         message,
         context: contextStr,
         conversationId,
         sessionId: sessionMapping?.sessionId,
         workDir: convWorkspace?.path,
+        agentId,
         timeout: 300_000,
       })
+
+      // Auto-retry: if empty response with existing session, retry with fresh session + full context
+      if (result.text.length === 0 && sessionMapping?.sessionId) {
+        console.log(`[${agentId}] Empty response with session ${sessionMapping.sessionId}, retrying with fresh session`)
+        this.store.deleteSessionMapping(agentId, conversationId)
+        const freshContext = this.context.formatForPrompt(bundle)
+        result = await this.errorHandler.executeWithRetry(agentId, {
+          message,
+          context: freshContext,
+          conversationId,
+          sessionId: undefined,
+          workDir: convWorkspace?.path,
+          agentId,
+          timeout: 300_000,
+        })
+      }
 
       // Persist session ID and context hash for future calls
       if (result.sessionId) {
@@ -428,6 +483,17 @@ export class Gateway {
       // Clean up response (strip subagent metadata)
       const cleanText = this.cleanAgentResponse(result.text)
       console.log(`[${agentId}] raw: ${result.text.length} chars, clean: ${cleanText.length} chars`)
+
+      // Skip empty responses — don't save or send
+      if (cleanText.length === 0) {
+        this.sendToConversation(conversationId, {
+          type: "chat_error",
+          messageId,
+          error: "Agent returned empty response",
+          recoverable: true,
+        })
+        return
+      }
 
       // Stream chunks
       this.sendToConversation(conversationId, {
@@ -502,18 +568,20 @@ export class Gateway {
         usage: result.usage ?? { inputTokens: 0, outputTokens: 0, totalTokens: 0, costUsd: 0, durationMs: result.durationMs },
       })
 
-      // Check for delegations in Munger's reply
+      // Check for delegations in Munger's reply — require user approval
       if (agentId === "munger" && result.stopReason === "end_turn") {
-        // Extract [共享上下文更新] block from Munger's reply
         this.extractAndUpdateSharedContext(cleanText, this.workspaceManager.getActiveId())
 
         const delegations = parseDelegations(result.text)
-        for (const delegation of delegations) {
-          this.loopDetector.incrementDepth(conversationId)
-          // Delegated results go to Munger for review, not directly to user
-          await this.executeAgentTurn(clientId, conversationId, delegation.target, delegation.task, "munger")
+        if (delegations.length > 0) {
+          // Send delegation proposal to frontend for user approval
+          this.sendToConversation(conversationId, {
+            type: "delegation_proposal",
+            conversationId,
+            delegations: delegations.map(d => ({ target: d.target, task: d.task })),
+          } as any)
+          // Do NOT execute delegations — wait for user approval
         }
-        this.loopDetector.resetDepth(conversationId)
       }
 
       // If this was a delegated task, notify Munger (message already shown via chat_chunk/chat_end)
@@ -556,6 +624,8 @@ export class Gateway {
       }
     } finally {
       this.activeTasks.delete(taskId)
+      // Broadcast agent status reset to all clients
+      this.broadcastAll({ type: "agent_status", agentId, status: "idle" })
     }
   }
 

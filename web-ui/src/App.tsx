@@ -1,4 +1,6 @@
 import { useState, useRef, useEffect } from 'react'
+import Markdown from 'react-markdown'
+import remarkGfm from 'remark-gfm'
 import { useGateway } from './hooks/useGateway'
 import RolesPage from './pages/Roles'
 import SkillsPage from './pages/Skills'
@@ -47,10 +49,12 @@ export default function App() {
     connected, messages, agents, streaming, send, cancel,
     workspaces, activeWorkspace, conversationId, conversations,
     switchWorkspace, createWorkspace, newConversation, switchConversation,
+    deleteConversation, renameConversation,
     delegationTasks, refreshDelegationTasks,
     cronJobs, cronRuns, refreshCronData,
     costSummary, setMessages,
     addCronJob, removeCronJob, toggleCronJob, runCronJob,
+    delegationProposal, approveDelegation, rejectDelegation,
   } = useGateway(WS_URL)
 
   const [input, setInput] = useState('')
@@ -64,11 +68,23 @@ export default function App() {
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false)
   const [showWorkspaceMenu, setShowWorkspaceMenu] = useState(false)
   const [newWsPath, setNewWsPath] = useState('')
+  const [contextMenu, setContextMenu] = useState<{ id: string; x: number; y: number } | null>(null)
+  const [renamingId, setRenamingId] = useState<string | null>(null)
+  const [renameValue, setRenameValue] = useState('')
+  const [delegationInput, setDelegationInput] = useState('')
   const messagesEndRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' })
   }, [messages, streaming])
+
+  // Close context menu on outside click
+  useEffect(() => {
+    if (!contextMenu) return
+    const close = () => setContextMenu(null)
+    document.addEventListener('click', close)
+    return () => document.removeEventListener('click', close)
+  }, [contextMenu])
 
   const handleSend = () => {
     const text = input.trim()
@@ -319,20 +335,70 @@ export default function App() {
               <div className="px-4 py-3 text-xs text-gray-700 italic">No conversations</div>
             ) : (
               conversations.slice(0, 30).map(conv => (
-                <button key={conv.id} onClick={() => switchConversation(conv.id)}
-                  className={`w-full px-4 py-2 text-left hover:bg-gray-800/50 flex items-center gap-2 ${
-                    conv.id === conversationId ? 'bg-gray-800 border-l-2 border-blue-500' : 'border-l-2 border-transparent'
-                  }`}>
-                  <span className="text-gray-600 text-xs">💬</span>
-                  <div className="flex-1 min-w-0">
-                    <div className="text-sm text-gray-300 truncate">{conv.title || 'Untitled'}</div>
-                    <div className="text-xs text-gray-600 flex items-center gap-1">
-                      {conv.workspaceName && <span className="text-gray-500">{conv.workspaceName}</span>}
-                      {conv.workspaceName && <span>·</span>}
-                      <span>{new Date(conv.updatedAt).toLocaleDateString()}</span>
+                <div key={conv.id} className="group relative">
+                  {renamingId === conv.id ? (
+                    <div className="px-4 py-2">
+                      <input
+                        type="text"
+                        value={renameValue}
+                        onChange={e => setRenameValue(e.target.value)}
+                        onKeyDown={e => {
+                          if (e.key === 'Enter') { renameConversation(conv.id, renameValue); setRenamingId(null) }
+                          if (e.key === 'Escape') setRenamingId(null)
+                        }}
+                        onBlur={() => { renameConversation(conv.id, renameValue); setRenamingId(null) }}
+                        autoFocus
+                        className="w-full px-2 py-1 bg-gray-800 text-sm text-gray-200 rounded border border-blue-500 focus:outline-none"
+                      />
                     </div>
-                  </div>
-                </button>
+                  ) : (
+                    <button
+                      onClick={() => switchConversation(conv.id)}
+                      className={`w-full px-4 py-2 text-left hover:bg-gray-800/50 flex items-center gap-2 ${
+                        conv.id === conversationId ? 'bg-gray-800 border-l-2 border-blue-500' : 'border-l-2 border-transparent'
+                      }`}
+                    >
+                      <span className="text-gray-600 text-xs">💬</span>
+                      <div className="flex-1 min-w-0">
+                        <div className="text-sm text-gray-300 truncate">{conv.title || 'Untitled'}</div>
+                        <div className="text-xs text-gray-600 flex items-center gap-1">
+                          {conv.workspaceName && <span className="text-gray-500">{conv.workspaceName}</span>}
+                          {conv.workspaceName && <span>·</span>}
+                          <span>{new Date(conv.updatedAt).toLocaleDateString()}</span>
+                        </div>
+                      </div>
+                      <span
+                        onClick={e => {
+                          e.stopPropagation()
+                          setContextMenu({ id: conv.id, x: 0, y: 0 })
+                        }}
+                        className="text-gray-600 hover:text-gray-300 opacity-0 group-hover:opacity-100 px-1 text-lg cursor-pointer"
+                      >
+                        ⋮
+                      </span>
+                    </button>
+                  )}
+                  {contextMenu?.id === conv.id && (
+                    <div className="absolute right-2 top-0 bg-gray-800 rounded border border-gray-700 shadow-xl z-30 py-1 w-32">
+                      <button
+                        onClick={() => {
+                          setRenamingId(conv.id)
+                          setRenameValue(conv.title || '')
+                          setContextMenu(null)
+                        }}
+                        className="w-full px-3 py-1.5 text-left text-sm text-gray-300 hover:bg-gray-700"
+                      >
+                        ✏️ Rename
+                      </button>
+                      <button
+                        onClick={() => { deleteConversation(conv.id); setContextMenu(null) }}
+                        className="w-full px-3 py-1.5 text-left text-sm text-red-400 hover:bg-gray-700"
+                      >
+                        🗑️ Delete
+                      </button>
+                    </div>
+                  )}
+                </div>
               ))
             )}
           </div>
@@ -397,7 +463,9 @@ export default function App() {
                           <span>{AGENTS[msg.agentId]?.name ?? msg.agentId}</span>
                         </div>
                       )}
-                      <div className="whitespace-pre-wrap text-sm leading-relaxed">{msg.content}</div>
+                      <div className="text-sm leading-relaxed markdown-body">
+                      <Markdown remarkPlugins={[remarkGfm]}>{msg.content}</Markdown>
+                    </div>
                     </div>
                   </div>
                 ))}
@@ -409,13 +477,71 @@ export default function App() {
                         <span>{AGENTS[streaming.agentId]?.emoji}</span>
                         <span>{AGENTS[streaming.agentId]?.name ?? streaming.agentId}</span>
                       </div>
-                      <div className="whitespace-pre-wrap text-sm leading-relaxed">
-                        {streaming.content || <span className="animate-pulse text-gray-500">thinking...</span>}
-                      </div>
+                    <div className="text-sm leading-relaxed markdown-body">
+                      {streaming.content
+                        ? <Markdown remarkPlugins={[remarkGfm]}>{streaming.content}</Markdown>
+                        : <span className="animate-pulse text-gray-500">thinking...</span>
+                      }
+                    </div>
                     </div>
                   </div>
                 )}
                 <div ref={messagesEndRef} />
+
+              {/* Delegation Approval Card */}
+              {delegationProposal && (
+                <div className="bg-gray-900 border border-yellow-600/50 rounded-lg p-4 space-y-3">
+                  <div className="flex items-center gap-2 text-yellow-400 text-sm font-medium">
+                    <span>⚠️</span>
+                    <span>Munger 想委派以下任务，是否批准？</span>
+                  </div>
+                  {delegationProposal.delegations.map((d, i) => (
+                    <div key={i} className="bg-gray-800 rounded p-3 border border-gray-700">
+                      <div className="flex items-center gap-2 mb-2">
+                        <span>{AGENTS[d.target]?.emoji ?? '👤'}</span>
+                        <span className="text-white text-sm font-medium">@{d.target}</span>
+                      </div>
+                      <div className="text-sm text-gray-300">{d.task}</div>
+                    </div>
+                  ))}
+                  <div className="flex gap-2">
+                    <button
+                      onClick={() => approveDelegation(delegationProposal.delegations)}
+                      className="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700 text-sm"
+                    >
+                      ✅ Yes
+                    </button>
+                    <button
+                      onClick={() => rejectDelegation('')}
+                      className="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700 text-sm"
+                    >
+                      ❌ No
+                    </button>
+                    <div className="flex-1 flex gap-2">
+                      <input
+                        type="text"
+                        value={delegationInput}
+                        onChange={e => setDelegationInput(e.target.value)}
+                        onKeyDown={e => {
+                          if (e.key === 'Enter' && delegationInput.trim()) {
+                            rejectDelegation(delegationInput.trim())
+                            setDelegationInput('')
+                          }
+                        }}
+                        placeholder="输入修改意见继续跟 Munger 对话..."
+                        className="flex-1 px-3 py-2 bg-gray-800 text-gray-200 rounded border border-gray-700 focus:border-blue-500 focus:outline-none text-sm"
+                      />
+                      <button
+                        onClick={() => { rejectDelegation(delegationInput.trim()); setDelegationInput('') }}
+                        disabled={!delegationInput.trim()}
+                        className="px-3 py-2 bg-gray-700 text-gray-300 rounded hover:bg-gray-600 text-sm disabled:opacity-50"
+                      >
+                        Send
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              )}
               </div>
 
               {/* Input Bar */}

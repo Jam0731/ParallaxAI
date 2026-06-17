@@ -337,7 +337,7 @@ export class Store {
   }
 
   getMessages(conversationId: string, branchId?: string, limit = 100): Message[] {
-    let sql = "SELECT * FROM messages WHERE conversation_id = ?"
+    let sql = "SELECT * FROM messages WHERE conversation_id = ? AND content != '' AND content IS NOT NULL"
     const params: any[] = [conversationId]
     if (branchId) {
       sql += " AND (branch_id = 'main' OR branch_id = ?)"
@@ -507,17 +507,26 @@ export class Store {
   }
 
   getConversationWorkspace(conversationId: string): string | undefined {
-    // Check conversations table first (set at creation time)
     const convRow = this.db.prepare(
       "SELECT workspace_id FROM conversations WHERE id = ? AND workspace_id IS NOT NULL"
     ).get(conversationId) as any
     if (convRow?.workspace_id) return convRow.workspace_id
 
-    // Fallback: check session_mappings
     const mapRow = this.db.prepare(
       "SELECT workspace_id FROM session_mappings WHERE conversation_id = ? AND workspace_id IS NOT NULL LIMIT 1"
     ).get(conversationId) as any
     return mapRow?.workspace_id ?? undefined
+  }
+
+  deleteConversation(conversationId: string): void {
+    this.db.prepare("DELETE FROM messages WHERE conversation_id = ?").run(conversationId)
+    this.db.prepare("DELETE FROM session_mappings WHERE conversation_id = ?").run(conversationId)
+    this.db.prepare("DELETE FROM delegated_tasks WHERE conversation_id = ?").run(conversationId)
+    this.db.prepare("DELETE FROM conversations WHERE id = ?").run(conversationId)
+  }
+
+  renameConversation(conversationId: string, title: string): void {
+    this.db.prepare("UPDATE conversations SET title = ?, updated_at = ? WHERE id = ?").run(title, Date.now(), conversationId)
   }
 
   // ── Delegated Tasks ──

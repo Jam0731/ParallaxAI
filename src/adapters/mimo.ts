@@ -1,6 +1,7 @@
 import { spawn, execSync, type ChildProcess } from "child_process"
-import { join } from "path"
+import { join, dirname } from "path"
 import { existsSync } from "fs"
+import { fileURLToPath } from "url"
 import { EventEmitter } from "events"
 import type {
   AgentAdapter, AgentChunk, AgentResponse, AgentTask,
@@ -58,7 +59,7 @@ export class MimoAdapter extends EventEmitter implements AgentAdapter {
     if (this.config.model) args.push("-m", this.config.model)
 
     const agentConfigDir = task.agentId
-      ? join(process.cwd(), "agent-configs", task.agentId)
+      ? join(this.getProjectDir(), "agent-configs", task.agentId)
       : undefined
     const env: Record<string, string> = {
       ...process.env as Record<string, string>,
@@ -67,6 +68,9 @@ export class MimoAdapter extends EventEmitter implements AgentAdapter {
     }
     if (agentConfigDir && existsSync(agentConfigDir)) {
       env.MIMOCODE_CONFIG_DIR = agentConfigDir
+      console.log(`[mimo-adapter] MIMOCODE_CONFIG_DIR=${agentConfigDir}`)
+    } else {
+      console.log(`[mimo-adapter] WARNING: agent-configs dir not found: ${agentConfigDir}`)
     }
 
     const child = spawn(this.command, args, {
@@ -153,7 +157,6 @@ export class MimoAdapter extends EventEmitter implements AgentAdapter {
   async cancel(): Promise<void> {
     if (this.runningProcess) {
       this.runningProcess.kill("SIGTERM")
-      // Give it 2 seconds, then force kill
       setTimeout(() => {
         if (this.runningProcess && !this.runningProcess.killed) {
           this.runningProcess.kill("SIGKILL")
@@ -161,5 +164,10 @@ export class MimoAdapter extends EventEmitter implements AgentAdapter {
       }, 2000)
       this.runningProcess = null
     }
+  }
+
+  private getProjectDir(): string {
+    const __dirname = dirname(fileURLToPath(import.meta.url))
+    return join(__dirname, "..", "..")
   }
 }

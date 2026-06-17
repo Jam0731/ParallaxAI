@@ -5,6 +5,7 @@ import type { AgentId, ContextBundle, Message } from "./types.js"
 
 export class ContextManager {
   constructor(
+    private agentConfigsDir: string,
     private sharedMemoryDir: string,
     private dataDir: string,
   ) {}
@@ -17,12 +18,10 @@ export class ContextManager {
     delegationTask?: string
     workspaceId?: string
   }): ContextBundle {
-    // SKILL.md is NOT loaded here — each adapter injects it via its own mechanism:
-    // MiMo: MIMOCODE_CONFIG_DIR, Claude: --append-system-prompt
+    const agentPersona = this.loadAgentPersona(params.agentId)
     const sharedContext = this.loadSharedContext(params.workspaceId)
     const conversationSummary = this.buildConversationSummary(params.history)
 
-    // Always build cross-agent context — every agent should see other agents' outputs
     const crossAgentContext = this.buildCrossAgentContext(
       params.delegatingAgent,
       params.agentId,
@@ -30,12 +29,25 @@ export class ContextManager {
       params.history,
     )
 
-    return { sharedContext, conversationSummary, crossAgentContext }
+    return { agentPersona, sharedContext, conversationSummary, crossAgentContext }
   }
 
   getVersionHash(bundle: ContextBundle): string {
-    const content = bundle.sharedContext ?? ""
+    const content = [
+      bundle.agentPersona ?? "",
+      bundle.sharedContext ?? "",
+    ].join("||")
     return createHash("md5").update(content).digest("hex")
+  }
+
+  private loadAgentPersona(agentId: string): string | undefined {
+    const agentsPath = join(this.agentConfigsDir, agentId, "AGENTS.md")
+    if (!existsSync(agentsPath)) return undefined
+    try {
+      return readFileSync(agentsPath, "utf-8")
+    } catch {
+      return undefined
+    }
   }
 
   private loadSharedContext(workspaceId?: string): string | undefined {
@@ -132,7 +144,7 @@ export class ContextManager {
 
   formatForPrompt(bundle: ContextBundle): string {
     const parts: string[] = []
-    // SKILL.md is injected by each adapter natively, not here
+    if (bundle.agentPersona) parts.push(`## Your Role\n${bundle.agentPersona}`)
     if (bundle.sharedContext) parts.push(`## Shared Context\n${bundle.sharedContext}`)
     if (bundle.conversationSummary) parts.push(`## Recent Conversation\n${bundle.conversationSummary}`)
     if (bundle.crossAgentContext) parts.push(bundle.crossAgentContext)
