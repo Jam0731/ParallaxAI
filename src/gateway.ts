@@ -449,6 +449,35 @@ export class Gateway {
       // Execute with error recovery
       const convWsId = this.store.getConversationWorkspace(conversationId)
       const convWorkspace = convWsId ? this.store.getWorkspace(convWsId) : this.workspaceManager.getActive()
+
+      // Progress callback — forward agent events to frontend in real-time
+      const onProgress = (event: import("./types.js").AgentProgressEvent) => {
+        if (event.type === "thinking") {
+          this.sendToConversation(conversationId, {
+            type: "chat_thinking",
+            messageId,
+            content: event.content ?? "",
+            agentId,
+          })
+        } else if (event.type === "tool_call") {
+          this.sendToConversation(conversationId, {
+            type: "chat_tool_call",
+            messageId,
+            toolCallId: event.toolCallId ?? "",
+            title: event.toolName ?? "tool",
+            status: "running",
+          })
+        } else if (event.type === "tool_result") {
+          this.sendToConversation(conversationId, {
+            type: "chat_tool_call",
+            messageId,
+            toolCallId: event.toolCallId ?? "",
+            title: "",
+            status: event.status === "completed" ? "completed" : "failed",
+          })
+        }
+      }
+
       let result = await this.errorHandler.executeWithRetry(agentId, {
         message,
         context: contextStr,
@@ -457,6 +486,7 @@ export class Gateway {
         workDir: convWorkspace?.path,
         agentId,
         timeout: 300_000,
+        onEvent: onProgress,
       })
 
       // Auto-retry: if empty response with existing session, retry with fresh session + full context
@@ -472,6 +502,7 @@ export class Gateway {
           workDir: convWorkspace?.path,
           agentId,
           timeout: 300_000,
+          onEvent: onProgress,
         })
       }
 

@@ -116,6 +116,19 @@ export class ClaudeAdapter extends EventEmitter implements AgentAdapter {
         const chunk = this.mapStreamEvent(event, gotTextFromAssistant)
         if (chunk) {
           if (chunk.type === "text" && event.type === "assistant") gotTextFromAssistant = true
+          // Emit progress events
+          if (chunk.type === "text" && chunk.content) {
+            task.onEvent?.({ type: "text", content: chunk.content })
+          }
+          if (chunk.type === "thinking" && chunk.content) {
+            task.onEvent?.({ type: "thinking", content: chunk.content })
+          }
+          if (chunk.type === "tool_call") {
+            task.onEvent?.({ type: "tool_call", toolName: chunk.toolTitle, toolCallId: chunk.toolCallId, status: "running" })
+          }
+          if (chunk.type === "tool_update") {
+            task.onEvent?.({ type: "tool_result", toolCallId: chunk.toolCallId, status: chunk.toolStatus === "completed" ? "completed" : "failed" })
+          }
           yield chunk
         }
       } catch { /* ignore malformed */ }

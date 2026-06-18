@@ -96,17 +96,33 @@ export class MimoAdapter extends EventEmitter implements AgentAdapter {
           const event = JSON.parse(line)
           if (event.sessionID) capturedSessionId = event.sessionID
 
-          // Capture text from various event formats
+          // Emit progress events
           if (event.type === "text" && event.part?.text) {
             chunks.push(event.part.text)
+            task.onEvent?.({ type: "text", content: event.part.text })
           } else if (event.type === "text" && typeof event.text === "string") {
             chunks.push(event.text)
+            task.onEvent?.({ type: "text", content: event.text })
           } else if (event.type === "assistant" && event.message?.content) {
             for (const block of event.message.content) {
-              if (block.type === "text" && block.text) chunks.push(block.text)
+              if (block.type === "text" && block.text) {
+                chunks.push(block.text)
+                task.onEvent?.({ type: "text", content: block.text })
+              }
+              if (block.type === "thinking" && block.thinking) {
+                task.onEvent?.({ type: "thinking", content: block.thinking })
+              }
+              if (block.type === "tool_use") {
+                task.onEvent?.({ type: "tool_call", toolName: block.name, toolCallId: block.id, status: "running" })
+              }
             }
           } else if (event.type === "result" && event.result) {
             chunks.push(event.result)
+            task.onEvent?.({ type: "text", content: event.result })
+          } else if (event.type === "tool_use") {
+            task.onEvent?.({ type: "tool_call", toolName: event.name ?? event.part?.name, toolCallId: event.id, status: "running" })
+          } else if (event.type === "tool_result") {
+            task.onEvent?.({ type: "tool_result", toolCallId: event.tool_use_id, status: event.is_error ? "failed" : "completed" })
           }
 
           if (event.type === "step-finish" || event.type === "step_finish") {

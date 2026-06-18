@@ -13,6 +13,14 @@ type ChatMessage = {
   timestamp: number
 }
 
+type StreamingState = {
+  id: string
+  agentId: string
+  content: string
+  thinking: string[]
+  toolCalls: Array<{ id: string; name: string; status: string }>
+}
+
 type Workspace = {
   id: string
   name: string
@@ -42,7 +50,7 @@ export function useGateway(url: string) {
   const [connected, setConnected] = useState(false)
   const [messages, setMessages] = useState<ChatMessage[]>([])
   const [agents, setAgents] = useState<Record<string, string>>({})
-  const [streaming, setStreaming] = useState<{ id: string; agentId: string; content: string } | null>(null)
+  const [streaming, setStreaming] = useState<StreamingState | null>(null)
   const [workspaces, setWorkspaces] = useState<Workspace[]>([])
   const [activeWorkspace, setActiveWorkspace] = useState<Workspace | null>(null)
   const [conversations, setConversations] = useState<Conversation[]>([])
@@ -134,11 +142,34 @@ export function useGateway(url: string) {
         break
 
       case 'chat_start':
-        setStreaming({ id: msg.messageId, agentId: msg.agentId, content: '' })
+        setStreaming({ id: msg.messageId, agentId: msg.agentId, content: '', thinking: [], toolCalls: [] })
         break
 
       case 'chat_chunk':
         setStreaming(prev => prev ? { ...prev, content: prev.content + (msg.chunk ?? '') } : null)
+        break
+
+      case 'chat_thinking':
+        setStreaming(prev => prev ? { ...prev, thinking: [...prev.thinking, msg.content ?? ''] } : null)
+        break
+
+      case 'chat_tool_call':
+        setStreaming(prev => {
+          if (!prev) return null
+          const existing = prev.toolCalls.find(t => t.id === msg.toolCallId)
+          if (existing) {
+            return {
+              ...prev,
+              toolCalls: prev.toolCalls.map(t =>
+                t.id === msg.toolCallId ? { ...t, status: msg.status } : t
+              ),
+            }
+          }
+          return {
+            ...prev,
+            toolCalls: [...prev.toolCalls, { id: msg.toolCallId, name: msg.title, status: msg.status }],
+          }
+        })
         break
 
       case 'chat_end':

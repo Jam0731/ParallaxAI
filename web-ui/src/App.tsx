@@ -477,12 +477,45 @@ export default function App() {
                         <span>{AGENTS[streaming.agentId]?.emoji}</span>
                         <span>{AGENTS[streaming.agentId]?.name ?? streaming.agentId}</span>
                       </div>
-                    <div className="text-sm leading-relaxed markdown-body">
-                      {streaming.content
-                        ? <Markdown remarkPlugins={[remarkGfm]}>{streaming.content}</Markdown>
-                        : <span className="animate-pulse text-gray-500">thinking...</span>
-                      }
-                    </div>
+
+                      {/* Thinking blocks */}
+                      {streaming.thinking.length > 0 && (
+                        <div className="mb-2">
+                          {streaming.thinking.map((t, i) => (
+                            <div key={i} className="text-xs text-gray-500 italic bg-gray-900/50 rounded p-2 mb-1 max-h-40 overflow-y-auto">
+                              💭 {t}
+                            </div>
+                          ))}
+                        </div>
+                      )}
+
+                      {/* Tool calls */}
+                      {streaming.toolCalls.length > 0 && (
+                        <div className="mb-2 space-y-1">
+                          {streaming.toolCalls.map(tc => (
+                            <div key={tc.id} className="flex items-center gap-2 text-xs">
+                              <span className={
+                                tc.status === 'running' ? 'text-yellow-400 animate-pulse' :
+                                tc.status === 'completed' ? 'text-green-400' :
+                                'text-red-400'
+                              }>
+                                {tc.status === 'running' ? '⏳' : tc.status === 'completed' ? '✅' : '❌'}
+                              </span>
+                              <span className="text-gray-400">🔧 {tc.name}</span>
+                            </div>
+                          ))}
+                        </div>
+                      )}
+
+                      {/* Text content */}
+                      <div className="text-sm leading-relaxed markdown-body">
+                        {streaming.content
+                          ? <Markdown remarkPlugins={[remarkGfm]}>{streaming.content}</Markdown>
+                          : (streaming.thinking.length === 0 && streaming.toolCalls.length === 0)
+                            ? <span className="animate-pulse text-gray-500">thinking...</span>
+                            : null
+                        }
+                      </div>
                     </div>
                   </div>
                 )}

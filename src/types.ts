@@ -67,6 +67,15 @@ export interface AgentTask {
   agentId?: string              // 用于 session 路由
   conversationId?: string       // 用于 session 复用
   sessionId?: string            // 持久化的 session ID（由 gateway 从 store 加载）
+  onEvent?: (event: AgentProgressEvent) => void
+}
+
+export interface AgentProgressEvent {
+  type: "thinking" | "text" | "tool_call" | "tool_result" | "error"
+  content?: string
+  toolName?: string
+  toolCallId?: string
+  status?: "running" | "completed" | "failed"
 }
 
 export interface AgentResponse {
@@ -239,7 +248,7 @@ export type ServerMessage =
   | { type: "chat_start"; conversationId: string; messageId: string; agentId: AgentId }
   | { type: "chat_chunk"; messageId: string; chunk: string; agentId: AgentId }
   | { type: "chat_thinking"; messageId: string; content: string; agentId: AgentId }
-  | { type: "chat_tool_call"; messageId: string; toolCallId: string; title: string; status: "pending" | "running" }
+  | { type: "chat_tool_call"; messageId: string; toolCallId: string; title: string; status: "pending" | "running" | "completed" | "failed" }
   | { type: "chat_tool_update"; messageId: string; toolCallId: string; status: "completed" | "failed"; output?: string }
   | { type: "chat_end"; messageId: string; stopReason: StopReason; usage: UsageInfo }
   | { type: "chat_error"; messageId: string; error: string; recoverable: boolean }
