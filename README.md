@@ -127,6 +127,12 @@ Each agent has specialized skills loaded from `agent-configs/{agent}/SKILL.md`:
 
 ---
 
+## Practical AI skills
+
+See the [Parallax practical skills showcase](showcase/README.md) for a free service-page check, complete generated website examples and a service-brief worksheet. The [Agensi collection](https://www.agensi.io/creators/jam0731?utm_source=github&utm_medium=readme&utm_campaign=service-page-launch) lists current commercial skills and their requirements.
+
+---
+
 ## Slash Commands
 
 | Command | Description |

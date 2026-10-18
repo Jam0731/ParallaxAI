@@ -127,6 +127,14 @@ Claude    MiMo Code    Reasonix    任意新
 
 ---
 
+## 实用 AI Skills
+
+在 [Parallax Skills 展示页](showcase/README.md) 查看免费服务页面检查工具、可下载的真实生成样例，以及一套服务说明迷你课材料。每个样例都标明了用途和适用范围。
+
+[Agensi 商品合集](https://www.agensi.io/creators/jam0731?utm_source=github&utm_medium=readme_zh&utm_campaign=service-page-launch)提供各个 Skill 的完整说明和当前价格。这里的开源协作网关和商业 Skills 是不同产品。
+
+---
+
 ## 斜杠命令
 
 | 命令 | 说明 |

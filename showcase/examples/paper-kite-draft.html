@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Paper Kite is a fictional UX writing service for small software teams. Explore an illustrative onboarding copy rewrite and the proposed approach. Draft preview; inquiries are not yet open.">
+  <meta name="theme-color" content="#f9f6fc">
+  <title>Paper Kite — UX writing for onboarding</title>
+  <style>
+    :root { --paper: #f9f6fc; --white: #fffefd; --plum: #37223f; --muted: #6b5b72; --lilac: #dbc9f1; --light-lilac: #eee5f8; --line: #d9cde0; --accent: #6e428b; --soft: #f0edf2; --radius: 24px; }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin: 0; background: var(--paper); color: var(--plum); font: 1rem/1.65 system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; overflow-wrap: anywhere; }
+    a { color: inherit; text-underline-offset: .22em; }
+    a:focus-visible { outline: 3px solid var(--accent); outline-offset: 6px; border-radius: 4px; }
+    svg { display: block; }
+    h1, h2, h3, p { margin-top: 0; }
+    h1, h2, h3, blockquote { hyphens: auto; }
+    .hero-row > *, .section-intro > *, .comparison > *, .approach-grid > *, .scope-box > *, .steps li > *, .header-inner > *, .footer-inner > *, nav > * { min-width: 0; }
+    h1, h2 { font-family: Georgia, "Times New Roman", serif; font-weight: 400; line-height: 1.08; letter-spacing: -.045em; text-wrap: balance; }
+    h1 { font-size: clamp(3rem, 6.5vw, 5.9rem); margin-bottom: 1.5rem; max-width: 850px; }
+    h2 { font-size: clamp(2.25rem, 4.3vw, 3.6rem); margin-bottom: 1.4rem; }
+    h3 { font-size: 1.15rem; line-height: 1.35; letter-spacing: -.02em; }
+    p { max-width: 65ch; }
+    .wrap { width: min(1160px, calc(100% - 80px)); margin-inline: auto; }
+    .skip { position: absolute; top: 0; left: 1rem; max-width: calc(100% - 2rem); transform: translateY(-150%); background: var(--plum); color: white; padding: .75rem 1rem; z-index: 10; }
+    .skip:focus { top: 1rem; transform: none; }
+    header { border-bottom: 1px solid var(--line); }
+    .header-inner { min-height: 92px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 2rem; }
+    .brand { display: inline-flex; align-items: center; gap: .6rem; font-size: 1.3rem; font-weight: 750; letter-spacing: -.055em; text-decoration: none; max-width: 100%; }
+    .brand svg { width: 29px; height: 36px; flex-shrink: 0; }
+    nav { display: flex; flex-wrap: wrap; column-gap: 1.8rem; row-gap: .2rem; max-width: 100%; }
+    nav a { font-size: .9rem; text-decoration: none; padding-block: .7rem; }
+    nav a:hover { text-decoration: underline; }
+    .hero { padding: 76px 0 86px; position: relative; }
+    .eyebrow { font-size: .76rem; line-height: 1.5; font-weight: 700; letter-spacing: .13em; text-transform: uppercase; margin-bottom: 1.5rem; }
+    .hero-row { display: grid; grid-template-columns: minmax(0, 1.7fr) minmax(0, 1fr); align-items: center; gap: 4rem; }
+    .hero-copy { font-size: 1.18rem; line-height: 1.65; max-width: 43ch; color: var(--muted); margin-bottom: 2rem; }
+    .hero h1 em { color: var(--accent); font-style: italic; }
+    .button { display: inline-flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 1rem; min-height: 52px; max-width: 100%; padding: .8rem 1.3rem; border-radius: 999px; background: var(--plum); color: var(--white); text-decoration: none; text-align: center; font-size: .9rem; font-weight: 650; }
+    .button:hover { background: #563661; }
+    .draft-note { margin-top: 1rem; font-size: .8rem; color: var(--muted); }
+    .kite-scene { margin: 0; aspect-ratio: 1 / 1.15; width: 100%; max-width: 350px; justify-self: end; position: relative; }
+    .kite-scene svg { width: 100%; height: 100%; }
+    .kite-caption { position: absolute; bottom: 3%; right: 0; font: italic 1.15rem/1.5 Georgia, serif; transform: rotate(-5deg); }
+    section[id] { scroll-margin-top: 2rem; }
+    .example { padding: 72px 0 76px; background: var(--white); border-block: 1px solid var(--line); }
+    .section-intro { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: 3rem; align-items: end; margin-bottom: 2.4rem; }
+    .section-intro h2 { margin-bottom: 0; }
+    .section-intro p { color: var(--muted); margin-bottom: 0; }
+    .example-label { font-size: .75rem; color: var(--muted); margin-bottom: 1rem; }
+    .comparison { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr); gap: 1.25rem; }
+    .copy-card { border: 1px solid var(--line); border-radius: var(--radius); padding: 2rem; background: var(--paper); min-width: 0; }
+    .copy-card.after { background: var(--light-lilac); border-color: #d8c4ed; }
+    .card-label { display: flex; align-items: center; gap: .55rem; margin-bottom: 2.5rem; font-size: .75rem; letter-spacing: .1em; font-weight: 650; text-transform: uppercase; }
+    .dot { width: 7px; height: 7px; background: #a295aa; border-radius: 50%; flex-shrink: 0; }
+    .after .dot { background: var(--accent); }
+    blockquote { margin: 0; font-size: clamp(1.25rem, 2.3vw, 1.7rem); line-height: 1.5; font-weight: 550; letter-spacing: -.025em; }
+    .after blockquote { font-family: Georgia, serif; font-size: clamp(1.5rem, 2.6vw, 1.9rem); font-weight: 400; }
+    .annotation { border-top: 1px solid var(--line); margin: 2rem 0 0; padding-top: 1rem; font-size: .85rem; color: var(--muted); }
+    .after .annotation { border-color: #cdb7df; }
+    .example-footnote { font-size: .8rem; color: var(--muted); margin-top: 1.2rem; margin-bottom: 0; max-width: none; }
+    .approach { padding: 86px 0; }
+    .approach-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.3fr); gap: 6rem; }
+    .approach-intro p { color: var(--muted); max-width: 32ch; }
+    .steps { list-style: none; padding: 0; margin: 0; counter-reset: step; }
+    .steps li { counter-increment: step; display: grid; grid-template-columns: 2.4rem minmax(0, 1fr); gap: 1.3rem; padding: 1.7rem 0; border-top: 1px solid var(--line); }
+    .steps li:first-child { padding-top: 1.4rem; }
+    .steps li::before { content: "0" counter(step); font: italic 1.2rem/1.5 Georgia, serif; color: var(--accent); }
+    .steps h3 { margin-bottom: .45rem; }
+    .steps p { margin-bottom: 0; color: var(--muted); font-size: .95rem; }
+    .scope { padding: 0 0 80px; }
+    .scope-box { display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); gap: 4rem; border-radius: var(--radius); padding: 3rem; background: var(--plum); color: var(--white); }
+    .scope-box h2 { font-size: clamp(2.1rem, 3.5vw, 3rem); }
+    .scope-box p { color: #e2d7e9; }
+    .scope-box .eyebrow { color: #dbc9f1; }
+    .status { align-self: center; border-left: 1px solid #796480; padding-left: 2rem; }
+    .status h3 { font-size: 1rem; margin-bottom: .7rem; }
+    .status p { font-size: .9rem; margin-bottom: 0; }
+    .scope-copy p:last-child { margin-bottom: 0; }
+    footer { border-top: 1px solid var(--line); padding: 1.6rem 0 2rem; }
+    .footer-inner { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: start; gap: 2rem; }
+    .footer-name { font-size: .9rem; font-weight: 700; }
+    .footer-note { font-size: .75rem; color: var(--muted); max-width: 58ch; text-align: right; margin-bottom: 0; }
+    @media (max-width: 800px) {
+      .wrap { width: min(100% - 40px, 680px); }
+      .header-inner { min-height: 80px; gap: 1rem; }
+      nav { column-gap: 1.2rem; }
+      .hero { padding: 54px 0 60px; }
+      .hero-row { grid-template-columns: minmax(0, 1fr); gap: 1rem; }
+      h1 { font-size: clamp(3rem, 9vw, 4.4rem); }
+      .kite-scene { max-width: 200px; aspect-ratio: auto; justify-self: center; margin-top: 1rem; }
+      .kite-scene svg { height: auto; transform: rotate(12deg); }
+      .kite-caption { position: static; margin-top: .5rem; text-align: center; transform: none; font-size: 1rem; }
+      .section-intro { grid-template-columns: minmax(0, 1fr); gap: 1.2rem; }
+      .comparison { grid-template-columns: minmax(0, 1fr); }
+      .copy-card { padding: 1.6rem; }
+      .card-label { margin-bottom: 1.5rem; }
+      .example { padding: 56px 0; }
+      .approach { padding: 60px 0; }
+      .approach-grid { grid-template-columns: minmax(0, 1fr); gap: 1.4rem; }
+      .approach-intro p { max-width: 50ch; }
+      .scope { padding-bottom: 56px; }
+      .scope-box { grid-template-columns: minmax(0, 1fr); padding: 2rem; gap: 2rem; }
+      .status { border-left: 0; border-top: 1px solid #796480; padding: 1.5rem 0 0; }
+    }
+    @media (max-width: 480px) {
+      .header-inner { flex-direction: column; align-items: flex-start; padding: 1rem 0 .6rem; gap: .3rem; }
+      nav { justify-content: space-between; width: 100%; }
+      nav a { font-size: .83rem; }
+      .hero { padding-top: 42px; }
+      h1 { font-size: 3rem; }
+      .hero-copy { font-size: 1.05rem; }
+      .kite-scene { max-width: 150px; }
+      .kite-caption { font-size: .9rem; }
+      .copy-card, .scope-box { padding: 24px; }
+      .steps li { grid-template-columns: minmax(0, 1fr); gap: .5rem; }
+      .footer-inner { flex-direction: column; gap: .6rem; }
+      .footer-note { text-align: left; }
+    }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+    @media print { body { background: white; } .skip, nav, .button { display: none; } .wrap { width: 100%; } .hero, .example, .approach, .scope { padding: 1.5rem 0; } .copy-card, .scope-box { break-inside: avoid; } }
+  </style>
+</head>
+<body id="top">
+  <a class="skip" href="#main">Skip to content</a>
+  <header>
+    <div class="wrap header-inner">
+      <!-- BRAND: edit the business name here and in the title, description and footer. -->
+      <a class="brand" href="#top" aria-label="Paper Kite, back to top">
+        <svg viewBox="0 0 30 40" aria-hidden="true"><path d="M15 2 28 13 15 30 2 13Z" fill="#dbc9f1" stroke="#37223f" stroke-width="1.4"/><path d="m15 2 0 28M2 13h26M15 30q-5 5 1 8" fill="none" stroke="#37223f" stroke-width="1.2"/></svg>
+        Paper Kite
+      </a>
+      <nav aria-label="Main navigation">
+        <a href="#example">A writing example</a>
+        <a href="#approach">The approach</a>
+        <a href="#details">Project details</a>
+      </nav>
+    </div>
+  </header>
+  <main id="main">
+    <!-- OFFER: the service, audience and next available action. -->
+    <section class="hero wrap" aria-labelledby="hero-title">
+      <p class="eyebrow">UX writing for small software teams</p>
+      <div class="hero-row">
+        <div>
+          <h1 id="hero-title">Clearer words for your <em>onboarding.</em></h1>
+          <p class="hero-copy">Paper Kite rewrites confusing onboarding screens, with proposed copy and a short explanation of what changed.</p>
+          <a class="button" href="#example">Explore a writing example <span aria-hidden="true">↗</span></a>
+          <p class="draft-note">Draft preview · Inquiries are not open yet.</p>
+        </div>
+        <figure class="kite-scene" aria-hidden="true">
+          <svg viewBox="0 0 350 400" fill="none">
+            <path d="M92 221c-21 44 39 40 24 81-9 26-61 18-45 52 10 21 42 14 55 38" stroke="#a58ab9" stroke-width="1.5" stroke-linecap="round"/>
+            <path d="m149 18 143 107-128 130L57 122Z" fill="#dbc9f1"/>
+            <path d="m149 18 15 237 128-130Z" fill="#c4a5e2"/>
+            <path d="m149 18 15 237M57 122l235 3" stroke="#6e428b" stroke-width="1.5"/>
+            <path d="m164 255-72-34M92 221 57 122" stroke="#a58ab9" stroke-width="1.3"/>
+            <path d="m108 285 14 0-4 11Z" fill="#c4a5e2"/>
+            <path d="m69 347 16-4-3 13Z" fill="#c4a5e2"/>
+            <path d="m301 57 16-8m-5 31 21 1M43 62 32 49" stroke="#b59ac8" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+          <figcaption class="kite-caption">A little less guesswork.</figcaption>
+        </figure>
+      </div>
+    </section>
+    <!-- EXAMPLE: supplied illustrative text; this is not a client case or result. -->
+    <section class="example" id="example" aria-labelledby="example-title">
+      <div class="wrap">
+        <div class="section-intro">
+          <div><p class="eyebrow">From vague to specific</p><h2 id="example-title">What does “object”<br>actually mean?</h2></div>
+          <p>An empty state is a small moment with a practical job: explain what is missing and suggest a next step. Here is one possible rewrite.</p>
+        </div>
+        <p class="example-label">ILLUSTRATIVE WRITING EXAMPLE · Supplied by Paper Kite</p>
+        <div class="comparison">
+          <article class="copy-card" aria-labelledby="original-title">
+            <h3 class="card-label" id="original-title"><span class="dot" aria-hidden="true"></span>Original wording</h3>
+            <blockquote>No object available</blockquote>
+            <p class="annotation">“Object” leaves the reader to work out what is missing.</p>
+          </article>
+          <article class="copy-card after" aria-labelledby="rewrite-title">
+            <h3 class="card-label" id="rewrite-title"><span class="dot" aria-hidden="true"></span>Possible rewrite</h3>
+            <blockquote>No projects yet. Create your first project to start organizing the work.</blockquote>
+            <p class="annotation">Names the missing item, suggests an action and explains its purpose. The wording would need to fit the actual product flow.</p>
+          </article>
+        </div>
+        <p class="example-footnote">A writing example, not a customer case. No change in activation or other measured outcome is claimed.</p>
+      </div>
+    </section>
+    <!-- APPROACH: typical work from the brief; final project scope remains undecided. -->
+    <section class="approach wrap" id="approach" aria-labelledby="approach-title">
+      <div class="approach-grid">
+        <div class="approach-intro"><p class="eyebrow">The approach</p><h2 id="approach-title">The words, and<br>the thinking behind them.</h2><p>For small software teams with confusing onboarding screens to revisit. The work usually takes this shape.</p></div>
+        <ol class="steps">
+          <li><div><h3>Review the existing flow</h3><p>Look at the screens in context to understand where the wording becomes confusing.</p></div></li>
+          <li><div><h3>Propose revised copy</h3><p>Receive suggested wording for the onboarding screens being reviewed.</p></div></li>
+          <li><div><h3>Explain the changes</h3><p>Get a short explanation of the copy choices, alongside the proposed text.</p></div></li>
+        </ol>
+      </div>
+    </section>
+    <!-- UNRESOLVED: replace only when the owner supplies scope, price, terms and a real contact destination. -->
+    <section class="scope wrap" id="details" aria-labelledby="details-title">
+      <div class="scope-box">
+        <div class="scope-copy"><p class="eyebrow">Project details · draft</p><h2 id="details-title">The service is taking shape.</h2><p>The package, pricing and number of revisions are still being defined. No fixed scope or fee is offered on this draft page.</p></div>
+        <div class="status"><h3>Inquiries are not open yet</h3><p>A public contact method has not been added. This preview does not receive messages or take bookings.</p></div>
+      </div>
+    </section>
+  </main>
+  <footer>
+    <div class="wrap footer-inner"><span class="footer-name">Paper Kite</span><p class="footer-note">Fictional demonstration material. This page and its writing example do not represent customer results.</p></div>
+  </footer>
+</body>
+</html>

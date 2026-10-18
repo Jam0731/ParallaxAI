@@ -1,0 +1,279 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Fieldwork Studio helps independent design studios organize the handoff from approved design to implementation. Handoff Reset is a two-week project for one active client workflow, at a fixed USD 1,150. Fictional demonstration.">
+  <title>Handoff Reset for design studios — Fieldwork Studio</title>
+  <style>
+    :root {
+      --paper: #f4f1e8;
+      --white: #faf8f2;
+      --ink: #182c2a;
+      --muted: #4f6059;
+      --green: #365e4c;
+      --light-green: #e1e8db;
+      --rule: #bdc4b6;
+      --serif: Georgia, "Times New Roman", serif;
+      --sans: "Segoe UI", Arial, sans-serif;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-padding-top: 1.5rem; }
+    body { margin: 0; background: var(--paper); color: var(--ink); font-family: var(--sans); font-size: 1rem; line-height: 1.6; overflow-wrap: anywhere; }
+    /* Allow enlarged text to reflow inside every grid and flex layout. */
+    :where(.site-header, .brand, nav, .hero, .offer-line, .button, .figure-top, .handoff-item, .context-strip, .offer-grid, .deliverables li, .boundaries, .process-heading, .steps, .steps li, .about, .contact, footer) > * { min-width: 0; }
+    a { color: inherit; text-underline-offset: .22em; }
+    a:hover { text-decoration-thickness: 2px; }
+    a:focus-visible { outline: 3px solid var(--green); outline-offset: 5px; }
+    p, h1, h2, h3 { margin-top: 0; }
+    p { margin-bottom: 1rem; }
+    h1, h2, h3 { font-weight: 400; }
+    h1, h2 { font-family: var(--serif); letter-spacing: -.045em; line-height: 1.05; }
+    h1 { font-size: clamp(2.8rem, 5.6vw, 5.25rem); max-width: 12ch; margin-bottom: 1.5rem; }
+    h2 { font-size: clamp(2.25rem, 4vw, 3.7rem); max-width: 15ch; margin-bottom: 1.5rem; }
+    h3 { font-size: 1.1rem; line-height: 1.4; font-weight: 600; }
+    .wrap { width: min(100% - 6rem, 1240px); margin-inline: auto; }
+    .skip { position: absolute; top: -10rem; left: 1rem; z-index: 10; max-width: calc(100% - 2rem); padding: .7rem 1rem; color: var(--white); background: var(--ink); }
+    .skip:focus { top: 1rem; }
+    .eyebrow { color: var(--green); font-size: .75rem; font-weight: 650; letter-spacing: .12em; text-transform: uppercase; }
+    .site-header { display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; padding-block: 1.6rem; border-bottom: 1px solid var(--rule); }
+    .brand { display: inline-flex; gap: .75rem; align-items: center; text-decoration: none; font-size: 1.12rem; font-weight: 650; letter-spacing: -.03em; }
+    .brand-mark { position: relative; flex: 0 0 23px; width: 23px; height: 25px; border-left: 3px solid var(--ink); }
+    .brand-mark::before, .brand-mark::after { content: ""; position: absolute; height: 3px; left: 0; background: var(--ink); }
+    .brand-mark::before { width: 20px; top: 0; }
+    .brand-mark::after { width: 13px; top: 10px; }
+    nav { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem 1.8rem; }
+    nav a { display: inline-flex; align-items: center; max-width: 100%; min-height: 44px; font-size: .88rem; text-decoration: none; }
+    nav a:hover { text-decoration: underline; }
+    .demo { font-size: .68rem; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); border: 1px solid var(--rule); padding: .35rem .6rem; width: fit-content; max-width: 100%; }
+    .hero { display: grid; grid-template-columns: minmax(0, 1.12fr) minmax(0, 1fr); gap: clamp(2rem, 6vw, 6rem); align-items: center; padding-block: 2.25rem 5rem; }
+    .hero-copy .demo { margin-bottom: 2.15rem; }
+    .hero-copy .eyebrow { margin-bottom: 1.2rem; }
+    .intro { max-width: 44ch; font-size: 1.12rem; color: var(--muted); }
+    .offer-line { display: flex; flex-wrap: wrap; gap: .25rem .65rem; font-size: .9rem; margin-block: 1.65rem 1.2rem; }
+    .offer-line strong { font-weight: 650; }
+    .button { display: inline-flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: min(1.5rem, 24px); max-width: 100%; min-height: 52px; padding: .85rem min(1.2rem, 24px); background: var(--green); color: var(--white); font-weight: 600; font-size: .95rem; line-height: 1.4; text-decoration: none; border: 1px solid var(--green); }
+    .button > [aria-hidden] { flex: none; }
+    .button:hover { background: var(--ink); border-color: var(--ink); }
+    .button:focus-visible { outline-offset: 4px; }
+    .cta-note { margin-top: .65rem; font-size: .78rem; color: var(--muted); }
+    .handoff-map { margin: 2rem 0 0; background: var(--light-green); padding: 1.8rem 2rem 1.5rem; border: 1px solid #c2cfbd; }
+    .figure-top { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 1rem; padding-bottom: 1.25rem; border-bottom: 1px solid #aebca7; font-size: .72rem; text-transform: uppercase; letter-spacing: .08em; }
+    .diagram { padding-block: 1.6rem 1.2rem; }
+    .diagram-node { background: var(--white); border: 1px solid #aebca7; padding: 1rem 1.2rem; }
+    .diagram-node .node-label { display: block; margin-bottom: .25rem; font-size: .68rem; text-transform: uppercase; letter-spacing: .1em; color: var(--muted); }
+    .diagram-node strong { font-family: var(--serif); font-size: 1.45rem; font-weight: 400; letter-spacing: -.025em; }
+    .connector { display: flex; justify-content: center; align-items: center; min-height: 36px; font-size: 1.3rem; color: var(--green); }
+    .diagram-middle { border: 1px solid var(--green); padding: 1.1rem 1.2rem; }
+    .diagram-middle .middle-title { margin-bottom: .75rem; font-size: .72rem; text-transform: uppercase; letter-spacing: .1em; color: var(--green); }
+    .handoff-item { display: flex; gap: .7rem; align-items: baseline; font-size: .95rem; }
+    .handoff-item + .handoff-item { margin-top: .55rem; }
+    .tick { color: var(--green); font-size: .85rem; }
+    .handoff-map figcaption { color: var(--muted); font-size: .73rem; border-top: 1px solid #aebca7; padding-top: 1rem; }
+    .context-strip { display: grid; grid-template-columns: minmax(0, .6fr) minmax(0, 1.4fr); gap: 2rem; padding-block: 1.8rem; border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); align-items: baseline; }
+    .context-strip .eyebrow { margin: 0; }
+    .context-strip p:last-child { margin: 0; max-width: 66ch; font-size: 1.1rem; }
+    .section { padding-block: 5rem; }
+    .offer-grid { display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); gap: clamp(2rem, 6vw, 6rem); }
+    .offer-summary { max-width: 41ch; }
+    .price-block { border-block: 1px solid var(--rule); padding-block: 1.15rem; margin-block: 2rem 1.3rem; }
+    .price { font-size: 1.9rem; font-family: var(--serif); line-height: 1.2; margin-bottom: .3rem; }
+    .price small { font-family: var(--sans); font-size: .88rem; margin-right: .3rem; }
+    .price-block p:last-child { margin-bottom: 0; font-size: .85rem; color: var(--muted); }
+    .deliverables { padding: 0; margin: 0; list-style: none; border-top: 1px solid var(--rule); }
+    .deliverables li { display: grid; grid-template-columns: 2rem minmax(0, 1fr); gap: 1rem; border-bottom: 1px solid var(--rule); padding: 1.3rem 0; }
+    .item-number { font-size: .75rem; color: var(--green); padding-top: .18rem; }
+    .deliverables h3 { margin-bottom: .45rem; }
+    .deliverables p { color: var(--muted); margin-bottom: 0; font-size: .95rem; }
+    .boundaries { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 2rem; padding: 1.5rem; margin-top: 2rem; background: #ebe9df; border-left: 3px solid var(--green); }
+    .boundaries h3 { font-size: .87rem; margin-bottom: .65rem; }
+    .boundaries p { font-size: .86rem; color: var(--muted); margin: 0; }
+    .process { background: var(--ink); color: var(--paper); }
+    .process .eyebrow { color: #c0d0b7; }
+    .process-heading { display: flex; gap: 2rem; justify-content: space-between; align-items: end; margin-bottom: 3rem; }
+    .process-heading h2 { margin-bottom: 0; max-width: 18ch; }
+    .process-heading > p { max-width: 29ch; color: #cad2c8; font-size: .95rem; margin-bottom: .2rem; }
+    .steps { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 2rem; list-style: none; padding: 0; margin: 0; }
+    .steps li { border-top: 1px solid #6c8076; padding-top: 1.1rem; }
+    .step-number { display: block; color: #c0d0b7; font-family: var(--serif); font-size: 1.8rem; margin-bottom: 1.4rem; }
+    .steps h3 { margin-bottom: .65rem; }
+    .steps p { font-size: .9rem; color: #cad2c8; margin: 0; }
+    .about { display: grid; grid-template-columns: minmax(0, .6fr) minmax(0, 1.4fr); gap: 2rem; border-bottom: 1px solid var(--rule); }
+    .about h2 { max-width: 21ch; font-size: clamp(2rem, 3.1vw, 3rem); }
+    .about-copy { max-width: 64ch; }
+    .about-copy p { color: var(--muted); }
+    .signature { margin-top: 1.6rem; padding-left: 1rem; border-left: 2px solid var(--green); }
+    .signature strong, .signature span { display: block; }
+    .signature strong { font-size: .95rem; font-weight: 600; }
+    .signature span { font-size: .8rem; color: var(--muted); }
+    .contact { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 3rem; align-items: center; }
+    .contact h2 { max-width: 16ch; margin-bottom: 0; }
+    .contact-copy { max-width: 44ch; }
+    .contact-copy p { color: var(--muted); }
+    .email { display: block; width: fit-content; margin-top: 1.15rem; overflow-wrap: anywhere; }
+    footer { display: flex; justify-content: space-between; flex-wrap: wrap; gap: .7rem 2rem; padding-block: 1.5rem; border-top: 1px solid var(--rule); color: var(--muted); font-size: .76rem; }
+    footer p { margin: 0; }
+    @media (max-width: 900px) {
+      .wrap { width: min(100% - 3rem, 1240px); }
+      .hero { gap: 2rem; }
+      .handoff-map { padding: 1.4rem; }
+      .steps { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 2.2rem; }
+      .offer-grid { gap: 2.5rem; }
+    }
+    @media (max-width: 650px) {
+      .wrap { width: min(100% - min(2.5rem, 40px), 1240px); }
+      .site-header { flex-wrap: wrap; gap: .4rem; padding-block: 1.2rem .8rem; }
+      .brand { min-height: 44px; }
+      nav { width: 100%; gap: .3rem 1.5rem; }
+      nav a { font-size: .82rem; }
+      .hero, .offer-grid, .context-strip, .about, .contact { grid-template-columns: minmax(0, 1fr); }
+      .hero { padding-block: 1.6rem 3rem; gap: 1.5rem; }
+      .hero-copy .demo { margin-bottom: 1.7rem; }
+      h1 { font-size: clamp(2.65rem, 11vw, 4.2rem); max-width: 13ch; }
+      .intro { font-size: 1rem; }
+      .handoff-map { margin-top: 0; padding: min(1.4rem, 24px); }
+      .diagram-node { padding: min(1rem, 20px) min(1.2rem, 24px); }
+      .diagram-middle { padding: min(1.1rem, 22px) min(1.2rem, 24px); }
+      .context-strip { gap: .7rem; padding-block: 1.4rem; }
+      .context-strip p:last-child { font-size: 1rem; }
+      .section { padding-block: 3.25rem; }
+      .offer-grid { gap: 1.7rem; }
+      .offer-summary { max-width: none; }
+      .boundaries { grid-template-columns: minmax(0, 1fr); gap: 1.2rem; padding: 1.2rem; }
+      .process-heading { display: block; margin-bottom: 2rem; }
+      .process-heading > p { margin-top: 1.3rem; max-width: 45ch; }
+      .steps { grid-template-columns: minmax(0, 1fr); gap: 1.5rem; }
+      .steps li { display: grid; grid-template-columns: 2rem minmax(0, 1fr); column-gap: 1rem; }
+      .step-number { grid-row: span 2; margin: 0; font-size: 1.45rem; }
+      .steps p { grid-column: 2; }
+      .about { gap: .5rem; }
+      .contact { gap: 1.5rem; }
+      .button { max-width: 100%; }
+      footer { display: block; }
+      footer p + p { margin-top: .5rem; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+    }
+    @media print {
+      body { background: white; }
+      .wrap { width: 100%; }
+      .site-header nav, .skip { display: none; }
+      .section, .hero { padding-block: 1.5rem; }
+      .process { background: white; color: var(--ink); }
+      .process .eyebrow, .process-heading > p, .steps p, .step-number { color: var(--muted); }
+      .button { background: transparent; color: var(--ink); }
+      .handoff-map, .boundaries, .steps li { break-inside: avoid; }
+    }
+  </style>
+</head>
+<body id="top">
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="site-header wrap">
+    <a class="brand" href="#top" aria-label="Fieldwork Studio, back to top"><span class="brand-mark" aria-hidden="true"></span>Fieldwork Studio</a>
+    <nav aria-label="Main navigation">
+      <a href="#the-reset">The reset</a>
+      <a href="#how-it-works">How it works</a>
+      <a href="#about">About</a>
+      <a href="#contact">Get in touch ↗</a>
+    </nav>
+  </header>
+  <main id="main">
+    <section class="hero wrap" aria-labelledby="hero-title">
+      <div class="hero-copy">
+        <p class="demo">Fictional demonstration</p>
+        <p class="eyebrow">Operations for independent design studios</p>
+        <h1 id="hero-title">A clear handoff from design to implementation.</h1>
+        <p class="intro">Approved design. Missing files. An unanswered decision. Handoff Reset helps your studio organize the work between approval and implementation.</p>
+        <!-- OFFER FACTS: Keep price, duration and scope in sync with #the-reset and the meta description. -->
+        <p class="offer-line"><strong>Handoff Reset</strong><span>Two weeks · fixed USD 1,150</span></p>
+        <!-- CONTACT: Update every mailto link and the visible address together. -->
+        <a class="button" href="mailto:studio@fieldwork.example?subject=Handoff%20Reset%20inquiry">Discuss your next handoff <span aria-hidden="true">↗</span></a>
+        <p class="cta-note">Opens your mail app.</p>
+      </div>
+      <figure class="handoff-map" aria-labelledby="map-caption">
+        <div class="figure-top"><span>The space between</span><span>01 → 02</span></div>
+        <div class="diagram">
+          <div class="diagram-node"><span class="node-label">01 / Starting point</span><strong>Approved design</strong></div>
+          <div class="connector" aria-hidden="true">↓</div>
+          <div class="diagram-middle">
+            <p class="middle-title">Make the handoff explicit</p>
+            <div class="handoff-item"><span class="tick" aria-hidden="true">↳</span><span>A reusable checklist for the handoff</span></div>
+            <div class="handoff-item"><span class="tick" aria-hidden="true">↳</span><span>A log of decisions to carry forward</span></div>
+          </div>
+          <div class="connector" aria-hidden="true">↓</div>
+          <div class="diagram-node"><span class="node-label">02 / Next stage</span><strong>Implementation</strong></div>
+        </div>
+        <figcaption id="map-caption">Illustrative handoff map, not a client case. Fieldwork organizes the handoff; it does not manage your client project.</figcaption>
+      </figure>
+    </section>
+
+    <div class="context-strip wrap">
+      <p class="eyebrow">Made for your scale</p>
+      <p>For owners of independent design studios with 3–12 people, where projects wait for missing files or unclear decisions.</p>
+    </div>
+
+    <section class="section wrap" id="the-reset" aria-labelledby="reset-title">
+      <div class="offer-grid">
+        <div class="offer-summary">
+          <p class="eyebrow">One focused engagement</p>
+          <h2 id="reset-title">Handoff Reset</h2>
+          <p>Take one active client workflow, look at where its handoff gets stuck, and leave with a checklist and decision log your studio can reuse.</p>
+          <!-- OFFER FACTS: Fixed fee, project length and revision allowance. -->
+          <div class="price-block">
+            <p class="price"><small>Fixed fee</small> USD 1,150</p>
+            <p>Two-week project · one active client workflow</p>
+          </div>
+          <p>Two rounds of revisions to the checklist and decision log are included during the project.</p>
+        </div>
+        <ol class="deliverables" aria-label="What you receive">
+          <li><span class="item-number" aria-hidden="true">01</span><div><h3>A 60-minute discovery session</h3><p>Inspect a recent handoff and understand how the work moves through your studio.</p></div></li>
+          <li><span class="item-number" aria-hidden="true">02</span><div><h3>A map of your current handoff</h3><p>Make the sequence visible and identify the places where work waits.</p></div></li>
+          <li><span class="item-number" aria-hidden="true">03</span><div><h3>A reusable checklist and decision log</h3><p>Give the team a practical reference for the handoff and its decisions.</p></div></li>
+          <li><span class="item-number" aria-hidden="true">04</span><div><h3>A 45-minute team walkthrough</h3><p>Walk through using the checklist and decision log on the next project.</p></div></li>
+        </ol>
+      </div>
+      <div class="boundaries">
+        <div><h3>What you bring</h3><p>An anonymized recent project, plus one decision-maker who can be available during the engagement.</p></div>
+        <div><h3>What this project does not include</h3><p>Managing your clients’ projects, implementing a new software system, changing employment processes, or ongoing monthly support.</p></div>
+      </div>
+    </section>
+
+    <section class="section process" id="how-it-works" aria-labelledby="process-title">
+      <div class="wrap">
+        <div class="process-heading">
+          <div><p class="eyebrow">How the work unfolds</p><h2 id="process-title">Start with the work your team already does.</h2></div>
+          <p>A focused sequence, from one recent handoff to a shared way of approaching the next one.</p>
+        </div>
+        <ol class="steps">
+          <li><span class="step-number" aria-hidden="true">01</span><h3>Inspect the handoff</h3><p>Look through the anonymized recent project you supply.</p></li>
+          <li><span class="step-number" aria-hidden="true">02</span><h3>Find where work waits</h3><p>Identify the missing files and unclear decisions in the handoff.</p></li>
+          <li><span class="step-number" aria-hidden="true">03</span><h3>Build the working tools</h3><p>Create the checklist and decision log, then revise them within the included rounds.</p></li>
+          <li><span class="step-number" aria-hidden="true">04</span><h3>Walk the team through</h3><p>Show how to use the tools on the next project.</p></li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="section about wrap" id="about" aria-labelledby="about-title">
+      <p class="eyebrow">A small, independent practice</p>
+      <div class="about-copy">
+        <h2 id="about-title">Built from experience inside a design studio.</h2>
+        <p>Fieldwork Studio is run by Mira Rowan, an independent operations designer. Before starting the practice, she spent four years coordinating delivery in a six-person design studio.</p>
+        <p>Handoff Reset brings that experience to a specific part of your studio’s work: the move from approved design to implementation.</p>
+        <div class="signature"><strong>Mira Rowan</strong><span>Independent operations designer · Fieldwork Studio</span></div>
+      </div>
+    </section>
+
+    <section class="section contact wrap" id="contact" aria-labelledby="contact-title">
+      <div><p class="eyebrow">The next conversation</p><h2 id="contact-title">Where does your handoff get stuck?</h2></div>
+      <div class="contact-copy">
+        <p>Tell Mira a little about your studio and the handoff you want to work on. It is a starting point for discussing whether Handoff Reset fits your workflow.</p>
+        <a class="button" href="mailto:studio@fieldwork.example?subject=Handoff%20Reset%20inquiry">Discuss your next handoff <span aria-hidden="true">↗</span></a>
+        <a class="email" href="mailto:studio@fieldwork.example?subject=Handoff%20Reset%20inquiry">studio@fieldwork.example</a>
+        <p class="cta-note">The button opens your mail app; it does not send a message. This fictional demonstration uses a reserved example address.</p>
+      </div>
+    </section>
+  </main>
+  <footer class="wrap"><p>Fieldwork Studio · Independent operations design</p><p>Fictional demonstration · <a href="#top">Back to top ↑</a></p></footer>
+</body>
+</html>

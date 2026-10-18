@@ -1,0 +1,351 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Lumen Hours: one-to-one online mathematics tuition for adults with Sam Ellis. 50-minute sessions at GBP 45. Arrange a free 15-minute fit call by email. Fictional demonstration.">
+  <meta name="theme-color" content="#f8f4ec">
+  <title>Lumen Hours — Online maths tuition for adults</title>
+  <style>
+    :root {
+      --paper: #f8f4ec;
+      --white: #fffdf8;
+      --ink: #2d2d27;
+      --muted: #666257;
+      --amber: #e6ad4c;
+      --amber-ink: #775012;
+      --line: #d8cfbf;
+      --wash: #eee5d4;
+      --radius: 1.25rem;
+      --serif: Georgia, 'Times New Roman', serif;
+      --sans: 'Segoe UI', Arial, sans-serif;
+    }
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-padding-top: 1.5rem; }
+    body { margin: 0; background: var(--paper); color: var(--ink); font-family: var(--sans); font-size: 1.0625rem; line-height: 1.65; overflow-wrap: anywhere; }
+    h1, h2, h3, p, figure { margin: 0; }
+    h1, h2 { font-family: var(--serif); font-weight: 400; line-height: 1.06; letter-spacing: -.04em; text-wrap: balance; }
+    h1 { max-width: 12ch; font-size: clamp(3rem, 6.6vw, 5.8rem); }
+    h2 { font-size: clamp(2.25rem, 4vw, 3.6rem); }
+    h3 { font-size: 1.2rem; line-height: 1.35; }
+    p { max-width: 66ch; }
+    a { color: inherit; text-underline-offset: .22em; text-decoration-thickness: 1px; }
+    a:hover { text-decoration-thickness: 2px; }
+    a, p, h1, h2, h3, summary { overflow-wrap: anywhere; }
+    /* Enlarged text must be able to reflow inside every grid and flex track. */
+    :where(.header-row, .brand, .nav, .hero, .facts, .fact, .section-top, .paths, .example-layout, .exercise-label, .equation, .process, .tutor, .fee-layout, .faq-grid, .contact .wrap, .footer-row) > * { min-width: 0; }
+    a:focus-visible, summary:focus-visible { outline: 3px solid #8a5b13; outline-offset: 5px; border-radius: 3px; }
+    .wrap { width: min(1184px, calc(100% - 4rem)); margin-inline: auto; }
+    .skip { position: absolute; left: 1rem; top: -10rem; padding: .7rem 1rem; background: var(--ink); color: white; z-index: 2; }
+    .skip:focus { top: 1rem; }
+    .eyebrow { display: block; font-size: .75rem; font-weight: 650; line-height: 1.5; letter-spacing: .14em; text-transform: uppercase; color: var(--amber-ink); }
+    .small { font-size: .875rem; line-height: 1.55; color: var(--muted); }
+    .button { display: inline-block; max-width: 100%; min-height: 50px; padding: .85rem min(1.45rem, 24px); border: 1px solid transparent; border-radius: .4rem; background: var(--ink); color: var(--white); font-weight: 600; font-size: 1rem; text-align: center; text-decoration: none; line-height: 1.4; }
+    .button:hover { background: #48483b; text-decoration: none; }
+    .button.amber { background: var(--amber); color: var(--ink); }
+    .button.amber:hover { background: #f1bd66; }
+    .arrow { padding-left: .8rem; font-size: 1.2em; }
+    header { padding-block: 1.65rem; border-bottom: 1px solid var(--line); }
+    .header-row { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1.75rem; }
+    .brand { display: inline-flex; align-items: center; gap: .65rem; max-width: 100%; text-decoration: none; font-weight: 650; font-size: 1.3rem; letter-spacing: -.04em; }
+    .brand svg { width: 30px; height: 34px; flex: 0 0 auto; }
+    .nav { display: flex; align-items: center; flex-wrap: wrap; gap: .35rem 1.55rem; font-size: .875rem; }
+    .nav a { display: inline-flex; align-items: center; min-height: 44px; text-decoration: none; }
+    .nav a:hover { text-decoration: underline; }
+    .demo { display: inline-block; max-width: 100%; padding: .2rem .6rem; border: 1px solid var(--line); border-radius: 99px; font-size: .6875rem; color: var(--muted); }
+    .hero { display: grid; grid-template-columns: 1.12fr 1fr; align-items: center; gap: 3rem; padding-block: 4.4rem 4rem; }
+    .hero .eyebrow { margin-bottom: 1.25rem; }
+    .hero-copy > p { margin-top: 1.45rem; max-width: 47ch; color: var(--muted); font-size: 1.1rem; }
+    .hero-copy .button { margin-top: 2rem; }
+    .hero-copy .small { display: block; margin-top: .75rem; max-width: 45ch; }
+    .hero-art { position: relative; align-self: stretch; display: flex; align-items: center; justify-content: center; min-width: 0; }
+    .hero-art svg { display: block; width: 100%; max-width: 490px; height: auto; }
+    .hero-caption { position: absolute; bottom: 1.5rem; left: 2rem; right: 2rem; text-align: center; font-family: var(--serif); color: var(--muted); font-size: 1.15rem; font-style: italic; }
+    .facts { display: grid; grid-template-columns: repeat(3, 1fr); padding-block: 1.5rem; border-block: 1px solid var(--line); gap: 1.5rem; }
+    .fact { display: flex; flex-direction: column; gap: .1rem; }
+    .fact + .fact { border-left: 1px solid var(--line); padding-left: 2rem; }
+    .fact strong { font-size: 1rem; font-weight: 600; }
+    .fact span { font-size: .875rem; color: var(--muted); }
+    section { padding-block: 5rem; }
+    .section-top { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: end; margin-bottom: 2.5rem; }
+    .section-top .eyebrow, .section-intro .eyebrow { margin-bottom: .85rem; }
+    .section-top > p { color: var(--muted); }
+    .paths { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
+    .path { border-top: 2px solid var(--line); padding-top: 1.4rem; }
+    .path .number { display: block; color: var(--amber-ink); font-family: var(--serif); font-size: 1.2rem; margin-bottom: 1.2rem; }
+    .path p { color: var(--muted); margin-top: .7rem; }
+    .boundary { margin-top: 2rem; font-size: .875rem; color: var(--muted); }
+    .example-section { background: var(--wash); }
+    .example-layout { display: grid; grid-template-columns: .8fr 1.2fr; align-items: start; gap: 4rem; }
+    .section-intro p { margin-top: 1.35rem; color: var(--muted); }
+    .exercise { padding: 2rem; border: 1px solid #d7c8ac; background: var(--white); box-shadow: 0 14px 28px #50411908; border-radius: .6rem; }
+    .exercise-label { display: flex; flex-wrap: wrap; gap: .25rem 1rem; justify-content: space-between; padding-bottom: 1rem; margin-bottom: 1.2rem; border-bottom: 1px solid var(--line); font-size: .75rem; color: var(--muted); }
+    .exercise-label strong { color: var(--ink); font-weight: 600; }
+    .question { font-family: var(--serif); font-size: 1.4rem; line-height: 1.45; }
+    .equation { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: .8rem; margin-block: 1.8rem; text-align: center; }
+    .term { border-bottom: 2px solid #ca9d52; padding-bottom: .75rem; }
+    .term b { display: block; font-family: var(--serif); font-size: clamp(1.7rem, 3vw, 2.6rem); font-weight: 400; line-height: 1.4; }
+    .term span { display: block; color: var(--muted); font-size: .8rem; }
+    .operator { font-size: 1.7rem; align-self: start; padding-top: .3rem; }
+    .working { border-radius: .4rem; background: #f3eddf; padding: 1rem 1.2rem; }
+    .working p + p { margin-top: .3rem; }
+    .working strong { font-weight: 650; }
+    .example-note { margin-top: 1rem; }
+    .process { display: grid; grid-template-columns: .9fr 1.1fr; gap: 4.5rem; }
+    .steps { list-style: none; margin: 0; padding: 0; counter-reset: step; }
+    .steps li { position: relative; counter-increment: step; padding: 0 0 1.65rem 3.4rem; }
+    .steps li + li { padding-top: 1.65rem; border-top: 1px solid var(--line); }
+    .steps li::before { content: counter(step, decimal-leading-zero); position: absolute; left: 0; top: -.05rem; font-family: var(--serif); font-size: 1.5rem; color: var(--amber-ink); }
+    .steps li + li::before { top: 1.6rem; }
+    .steps p { margin-top: .5rem; color: var(--muted); }
+    .tutor { display: grid; grid-template-columns: 1fr 2fr; gap: 3rem; padding: 2.25rem 0; border-block: 1px solid var(--line); }
+    .tutor h2 { font-size: 2.3rem; }
+    .tutor .eyebrow { margin-bottom: .6rem; }
+    .tutor p { align-self: center; color: var(--muted); }
+    .fee-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 3.5rem; align-items: start; }
+    .price-box { border: 1px solid var(--line); border-radius: var(--radius); background: var(--white); padding: 2.2rem; }
+    .price { font-family: var(--serif); font-size: 4rem; letter-spacing: -.05em; line-height: 1.1; margin-top: 1rem; }
+    .price span { font-family: var(--sans); font-size: 1rem; letter-spacing: 0; color: var(--muted); }
+    .price-box > p { margin-top: .65rem; color: var(--muted); }
+    .inclusions { list-style: none; padding: 0; margin: 1.5rem 0; border-top: 1px solid var(--line); }
+    .inclusions li { padding-block: .65rem; border-bottom: 1px solid var(--line); }
+    .inclusions li::before { content: '+'; color: var(--amber-ink); padding-right: .75rem; }
+    .price-box .small { margin-top: 1rem; }
+    .faq { padding-top: 0; }
+    .faq h2 { margin-bottom: 2.1rem; }
+    .faq-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0 3rem; align-items: start; }
+    details { border-top: 1px solid var(--line); padding-block: .3rem; }
+    summary { position: relative; padding: 1rem 1.75rem 1rem 0; font-weight: 600; cursor: pointer; list-style: none; }
+    summary::-webkit-details-marker { display: none; }
+    summary::after { content: '+'; position: absolute; right: .15rem; top: .8rem; font-size: 1.4rem; color: var(--amber-ink); font-weight: 400; }
+    details[open] summary::after { content: '−'; }
+    details > p { padding-bottom: 1.1rem; color: var(--muted); font-size: .98rem; }
+    .contact { background: var(--ink); color: var(--white); padding-block: 4.2rem; }
+    .contact .wrap { display: grid; grid-template-columns: 1.1fr 1fr; gap: 4rem; align-items: start; }
+    .contact .eyebrow { color: #edbd6d; margin-bottom: 1rem; }
+    .contact h2 { max-width: 14ch; }
+    .contact p { margin-top: 1.25rem; color: #dedbd1; }
+    .contact-action .button { margin-top: .25rem; }
+    .contact-action .email { display: block; font-size: 1.15rem; margin-top: 1.2rem; overflow-wrap: anywhere; }
+    .contact-action p { font-size: .875rem; }
+    .contact a:focus-visible { outline-color: #edbd6d; }
+    footer { padding-block: 1.4rem; }
+    .footer-row { display: flex; gap: 1rem 2rem; justify-content: space-between; align-items: center; flex-wrap: wrap; font-size: .8rem; color: var(--muted); }
+    @media (max-width: 900px) {
+      .wrap { width: min(1184px, calc(100% - min(3rem, 48px))); }
+      .header-row { gap: 1rem; flex-wrap: wrap; }
+      .hero { gap: 1.2rem; padding-top: 3rem; }
+      .hero-caption { position: static; padding-inline: 1rem; }
+      .hero-art { display: block; align-self: center; }
+      .example-layout, .process { gap: 2.5rem; }
+      .fee-layout, .contact .wrap { gap: 2.5rem; }
+    }
+    @media (max-width: 680px) {
+      .wrap { width: calc(100% - min(2.5rem, 40px)); }
+      header { padding-block: 1rem; }
+      .header-row { gap: .7rem; }
+      .brand { font-size: 1.2rem; }
+      .nav { order: 3; width: 100%; justify-content: space-between; gap: .2rem .9rem; }
+      .hero { grid-template-columns: 1fr; gap: 1rem; padding-block: 2.75rem 2.25rem; }
+      h1 { max-width: 13ch; font-size: clamp(3rem, 12.3vw, 4.5rem); }
+      .hero-copy > p { font-size: 1rem; margin-top: 1.2rem; }
+      .hero-copy .button { margin-top: 1.5rem; }
+      .hero-art { max-width: 360px; width: 100%; margin-inline: auto; }
+      .hero-caption { margin-top: -.8rem; font-size: 1rem; }
+      .facts { grid-template-columns: 1fr; gap: .9rem; padding-block: 1.25rem; }
+      .fact { flex-direction: row; justify-content: space-between; gap: 1rem; align-items: baseline; }
+      .fact + .fact { border-left: none; padding-left: 0; }
+      .fact span { text-align: right; }
+      section { padding-block: 3.25rem; }
+      .section-top, .example-layout, .process, .fee-layout, .contact .wrap, .tutor { grid-template-columns: 1fr; gap: 1.5rem; }
+      .section-top { margin-bottom: 2rem; }
+      .paths { grid-template-columns: 1fr; gap: 1.4rem; }
+      .path { position: relative; padding-left: 2.3rem; }
+      .path .number { position: absolute; left: 0; top: 1.25rem; margin: 0; }
+      .exercise { padding: 1.35rem; }
+      .question { font-size: 1.25rem; }
+      .equation { grid-template-columns: minmax(0, 1fr); gap: .5rem; }
+      .operator { padding-top: 0; }
+      .term b { font-size: 1.9rem; }
+      .process { gap: 2.25rem; }
+      .steps li:last-child { padding-bottom: 0; }
+      .tutor { padding-block: 1.8rem; gap: 1rem; }
+      .price-box { padding: 1.6rem; }
+      .faq-grid { grid-template-columns: 1fr; }
+      .contact { padding-block: 3rem; }
+      .contact .wrap { gap: 2rem; }
+      .contact h2 { max-width: 17ch; }
+    }
+    @media (max-width: 360px) {
+      .wrap { width: calc(100% - min(2rem, 32px)); }
+      .fact { flex-direction: column; gap: 0; }
+      .fact span { text-align: left; }
+      .equation { gap: .3rem; }
+      .term b { font-size: 1.65rem; }
+      .exercise { padding: 1.1rem min(1.1rem, 18px); }
+      .price-box { padding-inline: min(1.1rem, 18px); }
+      .working { padding-inline: min(1.2rem, 20px); }
+      .path, .steps li { padding-left: 0; }
+      .path .number { position: static; margin-bottom: .65rem; }
+      .steps li::before { position: static; display: block; margin-bottom: .45rem; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; animation: none !important; transition: none !important; }
+    }
+    @media print {
+      body { background: white; font-size: 11pt; }
+      .wrap { width: 100%; }
+      header, .hero-art, .skip, .button, footer { display: none; }
+      section, .hero, .contact { padding-block: 1.5rem; }
+      h1 { font-size: 38pt; }
+      h2 { font-size: 26pt; }
+      .contact, .example-section { background: white; color: var(--ink); }
+      .contact p, .contact .eyebrow { color: var(--ink); }
+      details > p { display: block !important; }
+      .price-box, .exercise { break-inside: avoid; box-shadow: none; }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <header>
+    <div class="wrap header-row">
+      <a class="brand" href="#main" aria-label="Lumen Hours home">
+        <svg viewBox="0 0 32 36" fill="none" aria-hidden="true"><path d="M5 16h22L20 4h-8L5 16Z" fill="#e6ad4c"/><path d="M16 17v13M7 32h18" stroke="#2d2d27" stroke-width="2.3" stroke-linecap="round"/><path d="m8 20-2 3m18-3 2 3" stroke="#a37326" stroke-width="1.6" stroke-linecap="round"/></svg>
+        Lumen Hours
+      </a>
+      <nav class="nav" aria-label="Main navigation">
+        <a href="#learning">The lessons</a>
+        <a href="#example">An example</a>
+        <a href="#fees">Fees</a>
+        <a href="#questions">Questions</a>
+      </nav>
+      <span class="demo">Fictional demo</span>
+    </div>
+  </header>
+  <main id="main" tabindex="-1">
+    <!-- OFFER: adult, one-to-one, online mathematics tuition. -->
+    <div class="wrap hero">
+      <div class="hero-copy">
+        <span class="eyebrow">One-to-one online maths · For adults</span>
+        <h1>Find your way back to maths.</h1>
+        <p>Refresh your algebra, prepare for a technical course, or revisit everyday mathematics with tutor Sam Ellis. Choose the topic you need to work on, together.</p>
+        <a class="button" href="mailto:sam@lumenhours.example?subject=Lumen%20Hours%20%E2%80%94%20free%2015-minute%20fit%20call&amp;body=Hello%20Sam%2C%0A%0AI%27d%20like%20to%20arrange%20a%20free%2015-minute%20fit%20call.%0A%0AThe%20maths%20I%27d%20like%20help%20with%3A%0A">Arrange a free fit call <span class="arrow" aria-hidden="true">↗</span></a>
+        <span class="small">Opens your mail app. A 15-minute conversation to discuss fit; it does not include a lesson.</span>
+      </div>
+      <figure class="hero-art">
+        <svg viewBox="0 0 490 470" fill="none" aria-hidden="true">
+          <defs><linearGradient id="light" x1="177" y1="138" x2="220" y2="362" gradientUnits="userSpaceOnUse"><stop stop-color="#e9b95d" stop-opacity=".45"/><stop offset="1" stop-color="#f7dc9e" stop-opacity=".1"/></linearGradient></defs>
+          <path d="M455 249c0 115-78 180-194 180S39 377 39 260 112 37 229 37 455 132 455 249Z" fill="#eee3cc"/>
+          <path d="m128 157 99-6 98 208-290 5 93-207Z" fill="url(#light)"/>
+          <path d="M34 365h418" stroke="#9c8e73" stroke-width="1.5" stroke-linecap="round"/>
+          <path d="m275 113 75 61-52 159" stroke="#3d4036" stroke-width="11" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle cx="351" cy="174" r="12" fill="#c99842" stroke="#3d4036" stroke-width="5"/>
+          <path d="M265 328h62a17 17 0 0 1 17 17v17h-96v-17a17 17 0 0 1 17-17Z" fill="#44463b"/>
+          <path d="m130 154 46-71 58-8 49 69-153 10Z" fill="#d7a044"/>
+          <path d="m176 83 58-8 49 69-48 5-59-66Z" fill="#ba822e"/>
+          <ellipse cx="206" cy="149" rx="77" ry="11" transform="rotate(-4 206 149)" fill="#f5ce7d"/>
+          <path d="m90 292 121-20 57 74-132 17-46-71Z" fill="#fffdf8" stroke="#b6a687" stroke-width="1.5" stroke-linejoin="round"/>
+          <path d="m112 307 76-12m-68 25 88-14m-79 27 46-7" stroke="#d0c5af" stroke-width="2" stroke-linecap="round"/>
+          <path d="m163 345 55-9-27-31" stroke="#9a7b40" stroke-width="2" stroke-linejoin="round"/>
+          <circle cx="163" cy="345" r="3" fill="#9a7b40"/><circle cx="218" cy="336" r="3" fill="#9a7b40"/><circle cx="191" cy="305" r="3" fill="#9a7b40"/>
+          <path d="m74 346 25 15m-29-17 5-5 29 17-5 7-29-19Z" fill="#c9953e"/>
+          <path d="m70 344-8-2 4 7 4-5Z" fill="#47483f"/>
+          <path d="M376 304h37v46a12 12 0 0 1-12 12h-13a12 12 0 0 1-12-12v-46Z" fill="#b4b6a0"/>
+          <path d="M414 314h8a10 10 0 0 1 0 20h-8" stroke="#b4b6a0" stroke-width="6"/>
+          <path d="M391 290c-10-10 8-13 0-23" stroke="#a5a18f" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+        <figcaption class="hero-caption">A little space to work things through.</figcaption>
+      </figure>
+    </div>
+    <div class="wrap facts" aria-label="Lesson essentials">
+      <div class="fact"><strong>One tutor, one learner</strong><span>Online · Adults only</span></div>
+      <div class="fact"><strong>50 minutes per session</strong><span>GBP 45 · Paid per session</span></div>
+      <div class="fact"><strong>Something to practise</strong><span>A short sheet after each lesson</span></div>
+    </div>
+    <section id="learning" class="wrap" aria-labelledby="learning-title">
+      <div class="section-top">
+        <div><span class="eyebrow">The lessons</span><h2 id="learning-title">Start with the maths<br>in front of you.</h2></div>
+        <p>You do not need to choose a course package. Talk with Sam about what you are working towards, then choose the relevant topic together.</p>
+      </div>
+      <div class="paths">
+        <article class="path"><span class="number" aria-hidden="true">01</span><h3>Refresh your algebra</h3><p>Return to expressions, variables and the algebra you want to revisit.</p></article>
+        <article class="path"><span class="number" aria-hidden="true">02</span><h3>Prepare for a technical course</h3><p>Bring the mathematics you want to work on before returning to study.</p></article>
+        <article class="path"><span class="number" aria-hidden="true">03</span><h3>Revisit everyday maths</h3><p>Work on the mathematics that comes up in daily life, with individual tuition.</p></article>
+      </div>
+      <p class="boundary">This is tuition for adults, not children. Lessons do not promise an exam result, admission or a particular grade.</p>
+    </section>
+    <section id="example" class="example-section" aria-labelledby="example-title">
+      <div class="wrap example-layout">
+        <div class="section-intro"><span class="eyebrow">An example, worked through</span><h2 id="example-title">Give the symbols<br>something to mean.</h2><p>A fixed charge and a cost per item can become an algebraic expression. Here is a short exercise, with the steps shown.</p><p class="small">This is an illustration of the teaching approach, not a student result or testimonial.</p></div>
+        <div class="exercise">
+          <div class="exercise-label"><strong>Example exercise</strong><span>Everyday costs → Algebra</span></div>
+          <p class="question">“A workshop charges £18 plus £6 per item. Write an expression for the cost of <i>n</i> items, then calculate the cost for four items.”</p>
+          <div class="equation" aria-label="18 pounds fixed cost, plus 6 pounds times n items">
+            <div class="term"><b>£18</b><span>Fixed charge</span></div>
+            <span class="operator" aria-hidden="true">+</span>
+            <div class="term"><b>£6 × <i>n</i></b><span>Cost per item × Items</span></div>
+          </div>
+          <div class="working"><p>Cost in pounds: <strong>18 + 6<i>n</i></strong></p><p>For four items: <strong>18 + (6 × 4) = £42</strong></p></div>
+          <p class="small example-note"><i>n</i> stands for the number of items. The £18 stays the same; the item cost changes with <i>n</i>.</p>
+        </div>
+      </div>
+    </section>
+    <section id="how-it-works" class="wrap process" aria-labelledby="process-title">
+      <div class="section-intro"><span class="eyebrow">How it works</span><h2 id="process-title">A conversation.<br>Then a first topic.</h2><p>Begin with a free fit call. It is a chance to discuss whether this tuition matches what you need.</p></div>
+      <ol class="steps">
+        <li><h3>Arrange a free 15-minute fit call</h3><p>Email Sam to arrange the conversation. This first call is about fit and does not include a lesson.</p></li>
+        <li><h3>Choose a topic together</h3><p>Talk about the maths you are returning to and select a relevant topic with Sam.</p></li>
+        <li><h3>Meet online, then practise</h3><p>Each one-to-one lesson lasts 50 minutes and costs GBP 45, paid per session. Sam provides a short practice sheet after the lesson.</p></li>
+      </ol>
+    </section>
+    <div class="wrap tutor" role="region" aria-labelledby="tutor-title">
+      <div><span class="eyebrow">Your tutor</span><h2 id="tutor-title">Meet Sam Ellis.</h2></div>
+      <p>Sam has taught adult evening classes for six years. Lumen Hours offers one-to-one online mathematics tuition for adults returning to study.</p>
+    </div>
+    <section id="fees" class="wrap fee-layout" aria-labelledby="fees-title">
+      <div class="section-intro"><span class="eyebrow">A clear starting point</span><h2 id="fees-title">One session<br>at a time.</h2><p>Start with the free 15-minute fit call. If the tuition fits your needs, lessons are paid for individually.</p><p>There is no subscription, package discount or recorded course.</p></div>
+      <!-- PRICE: fixed GBP 45 per 50-minute session; no package or subscription. -->
+      <div class="price-box">
+        <h3>One-to-one online tuition</h3>
+        <div class="price">£45 <span>GBP per session</span></div>
+        <p>50 minutes · Adults only · Paid per session</p>
+        <ul class="inclusions"><li>A topic chosen with your tutor</li><li>An individual online lesson with Sam</li><li>A short practice sheet after the lesson</li></ul>
+        <a href="#contact">Start with a free fit call <span aria-hidden="true">↗</span></a>
+        <p class="small">The free fit call lasts 15 minutes and does not include a lesson. Exam results, admission and grades are not guaranteed.</p>
+      </div>
+    </section>
+    <section id="questions" class="wrap faq" aria-labelledby="questions-title">
+      <span class="eyebrow">Practical questions</span>
+      <h2 id="questions-title">Before you get in touch.</h2>
+      <div class="faq-grid">
+        <div>
+          <details open><summary>Is this for someone who has been out of education?</summary><p>Yes. Lumen Hours is for adults returning to mathematics: refreshing algebra, preparing for a technical course or rebuilding confidence with everyday maths.</p></details>
+          <details><summary>What happens in the free fit call?</summary><p>It is a free 15-minute conversation to discuss fit. It does not include a lesson. Email Sam to arrange it.</p></details>
+          <details><summary>How do I choose what to study?</summary><p>You choose a relevant topic together with Sam. You can describe the maths you want help with in your first email.</p></details>
+          <details><summary>How long is a lesson, and what does it cost?</summary><p>Each one-to-one online lesson is 50 minutes and costs GBP 45, paid per session. There is no subscription or package discount.</p></details>
+        </div>
+        <div>
+          <details><summary>Will I have anything to work on afterwards?</summary><p>Sam provides a short practice sheet after a lesson. A recorded course is not part of this service.</p></details>
+          <details><summary>When can I book, and which online platform is used?</summary><p>Arrange the fit call by email and ask Sam about current availability and the online meeting details. The page does not offer live booking.</p></details>
+          <details><summary>What if I need to cancel or rearrange?</summary><p>Ask Sam for the cancellation and rearrangement terms before agreeing to a lesson.</p></details>
+          <details><summary>Do you teach children or guarantee grades?</summary><p>No. This service is for adults only. Tuition does not guarantee exam results, admission or any particular grade.</p></details>
+        </div>
+      </div>
+    </section>
+    <section id="contact" class="contact" aria-labelledby="contact-title">
+      <div class="wrap">
+        <div><span class="eyebrow">Start with a conversation</span><h2 id="contact-title">What maths is on your mind?</h2><p>Email Sam with the topic you would like help with and arrange a free 15-minute fit call. The call does not include a lesson.</p></div>
+        <!-- CONTACT: mail-app handoff only. This page does not send or store inquiries. -->
+        <div class="contact-action">
+          <a class="button amber" href="mailto:sam@lumenhours.example?subject=Lumen%20Hours%20%E2%80%94%20free%2015-minute%20fit%20call&amp;body=Hello%20Sam%2C%0A%0AI%27d%20like%20to%20arrange%20a%20free%2015-minute%20fit%20call.%0A%0AThe%20maths%20I%27d%20like%20help%20with%3A%0A">Open an email to Sam <span class="arrow" aria-hidden="true">↗</span></a>
+          <a class="email" href="mailto:sam@lumenhours.example">sam@lumenhours.example</a>
+          <p>The button opens a draft in your mail app; it does not send a message. If no app opens, copy the address into your email service.</p>
+          <p>Fictional demo: this example address is shown for testing and is not a live inquiry channel.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+  <footer><div class="wrap footer-row"><span>Lumen Hours · Online mathematics tuition for adults</span><span>Fictional demonstration · No live booking</span><a href="#main">Back to top ↑</a></div></footer>
+</body>
+</html>

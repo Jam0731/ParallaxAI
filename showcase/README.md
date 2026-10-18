@@ -1,0 +1,55 @@
+# Practical AI skills from Parallax
+
+Reusable skills for independent professionals and small teams. Start with a real task, provide the facts, and get something you can inspect and use.
+
+[Browse the Parallax skill collection on Agensi](https://www.agensi.io/creators/jam0731?utm_source=github&utm_medium=repository&utm_campaign=service-page-launch)
+
+## Start free: check your service page
+
+**Parallax Service Page Check** reviews your copy or HTML for a clear offer, supported claims, practical scope and a contact step that does what it says. You get up to five concrete fixes, with replacement wording where your facts support it. It does not send messages or require a paid purchase.
+
+[Read the free Skill](free-skills/parallax-service-page-check/SKILL.md) · [See an actual review](examples/service-page-review.md)
+
+![An actual service-page review with concrete fixes](images/service-page-check.png)
+
+Try it with this request:
+
+> Check this service page before I share it. Here is the copy and the facts I can support: [paste both]. Tell me what a buyer understands, the most important fixes and what still needs checking. Do not submit a form or send a message.
+
+## See what a complete service page can look like
+
+These pages were generated with **Parallax Service Page Builder** during local tests. They are complete, editable HTML files with their styling and original visuals included. Download a file and open it in a modern browser to inspect the result.
+
+All business names, people, prices and contact addresses in these examples are fictional. They are demonstrations, not client work, testimonials or conversion results. The reserved example addresses do not accept real inquiries.
+
+| Example | What it demonstrates | Actual HTML |
+|---|---|---|
+| Fieldwork Studio | A defined consulting offer, scope, price and email inquiry route | [HTML source and download](examples/fieldwork-studio.html) |
+| Paper Kite | A useful draft when price, proof and contact details are not ready | [HTML source and download](examples/paper-kite-draft.html) |
+| Lumen Hours | Adult tutoring, clear session pricing and a separate free fit call | [HTML source and download](examples/lumen-hours.html) |
+| Zusammenarbeitswerkstatt | A German page comparing two workshop offers | [HTML source and download](examples/workshop-german.html) |
+
+![Fieldwork Studio, a fictional generated service page](images/service-page-studio.png)
+
+![Lumen Hours, a different fictional service-page example](images/service-page-tutor.png)
+
+The accepted examples were checked in a local HTTP browser preview at desktop and phone widths, including a narrow layout with enlarged default text. Contact destinations and source facts were checked without sending inquiries. These checks are not a general accessibility certification or a guarantee of leads.
+
+## Give your AI a useful brief
+
+A polished page still needs real service facts. This free example lesson helps you write a six-field brief: buyer, deliverables, exclusions, known price and timing, permitted proof, and contact route.
+
+[Open the lesson package](service-brief-workshop/README.md) · [Learner worksheet](service-brief-workshop/03_learner-worksheet.md) · [Instructor answer key](service-brief-workshop/04_instructor-key.md)
+
+The package is an actual demonstration of **Parallax Course Pilot**. Its 12-minute duration is a planning estimate, not a recorded or rehearsed course. The learner worksheet and instructor answer key are separate.
+
+## Choosing a skill
+
+- **Check a page:** start with the free Service Page Check above.
+- **Build the actual page:** see Service Page Builder in the [Agensi collection](https://www.agensi.io/creators/jam0731?utm_source=github&utm_medium=showcase&utm_campaign=service-page-launch).
+- **Prepare a lesson:** Course Pilot produces teaching text, a worked example, learner practice and a separate answer key.
+- **Clarify the service:** Offer Stress Test helps work through scope, effort and price assumptions before making a promise to a client.
+
+Each listing states its current price, required host capabilities and limits. AI service fees and hosting are separate. The open-source collaboration gateway in this repository and the commercial skill collection are separate products.
+
+The free Skill and examples in this directory are covered by the repository's [MIT license](../LICENSE). Commercial Skill instructions are distributed through their marketplace listings.
