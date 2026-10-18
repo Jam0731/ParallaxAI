@@ -1,3 +1,57 @@
+# A service-page review: original input and actual result
+
+A fictional podcast-editing service, reviewed with Parallax Service Page Check. Both the supplied material and the complete review are below.
+
+## Fictional page review request
+
+Please review the service page below before I share it. I run a small podcast editing service. Give me concrete changes, not a full rebuild. All businesses and contact details here are fictional examples. Do not send anything.
+
+### Facts I can support
+
+- The service cleans speech audio, removes agreed false starts and exports a stereo MP3 and a WAV master.
+- It covers one episode up to 45 minutes of supplied audio and one revision round.
+- Price is USD 180 per episode. We agree delivery timing after checking the file.
+- I have edited 12 episodes for my own show, but no paying client case or testimonials yet.
+- The contact email I want to use is edits@quietlane.example.
+
+### Current page copy
+
+Quiet Lane Studio
+
+Elevate your audio journey with world-class solutions.
+
+Trusted by 500 leading brands. Our proprietary process doubles listener retention.
+
+Premium package — $180
+
+Everything you need for podcast success. Unlimited changes. Guaranteed delivery tomorrow.
+
+Start your transformation
+
+### HTML behind the contact section
+
+```html
+<form id="enquiry">
+  <label>Email <input name="email" type="email"></label>
+  <label>Tell us about your show <textarea name="message"></textarea></label>
+  <button type="submit">Send enquiry</button>
+  <p id="status" hidden>Thank you! Your enquiry has been sent.</p>
+</form>
+<script>
+document.getElementById('enquiry').addEventListener('submit',event=>{
+  event.preventDefault();
+  document.getElementById('status').hidden=false;
+});
+</script>
+```
+
+No form provider or server has been connected. I would be happy with a clear email link for now. I have not provided a rendered page, so focus on the copy and the supplied HTML behavior.
+
+
+---
+
+## Actual review
+
 # A service page review example
 
 Fictional demonstration from an actual Parallax Service Page Check run. No customer result or conversion improvement is claimed.
