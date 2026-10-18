@@ -48,4 +48,6 @@ For another skill-capable assistant, use its supported local Skill installation 
 
 The Skill reviews what you provide. With copy only, it cannot claim to have checked the rendered layout or live contact behavior. It does not measure conversion, rebuild a site or send a test inquiry.
 
+Found a concrete problem with a review? [Open a repository issue](https://github.com/Jam0731/ParallaxAI/issues) with the request, the relevant result, your assistant and the change you expected. A short fictional example is enough to reproduce most problems; share only material you can publish.
+
 [More free examples and Parallax tools](../../README.md) · [MIT license](../../../LICENSE)
