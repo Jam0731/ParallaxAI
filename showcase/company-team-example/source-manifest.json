@@ -1,0 +1,70 @@
+{
+  "description": "Selected exact business outputs from the fictional local trial; evaluator-only runtime, worker records and detailed check archives are not included.",
+  "product_version": "1.0.1",
+  "files": [
+    {
+      "path": "product/index.html",
+      "sha256": "5b51f52267973b933d0e8d9c142515c7f722c7f8591e8ef34edbebbd3476f748"
+    },
+    {
+      "path": "product/styles.css",
+      "sha256": "fe1a54526c74fd864f874f82034f7564ea8494601651147398962f37e559bfbe"
+    },
+    {
+      "path": "product/core.js",
+      "sha256": "9f306aca61dfdb6691774de19a950e00a63c3bcc769739c9e9c968591ee2bb92"
+    },
+    {
+      "path": "product/app.js",
+      "sha256": "6babe7059ea51c54f69fd30198fe07c31f645048661e13e7bfdb1ab3010f2bed"
+    },
+    {
+      "path": "product/leaf.svg",
+      "sha256": "e876ba9490d5319ebf7643ec45772126084ee5a8240fc400ce494603744b3b0b"
+    },
+    {
+      "path": "departments/munger/product-offer-brief.md",
+      "sha256": "dc859cec0f061166df3c05872290756b7d770f945ae34062d983c4db65d7fb1e"
+    },
+    {
+      "path": "departments/ogilvy/landing-page.md",
+      "sha256": "36d2a7a750062c66d8ba5794a4bd54fda4327219d4e5e4f0774fbd0cfda80034"
+    },
+    {
+      "path": "departments/ogilvy/launch-posts.md",
+      "sha256": "5acd285fc7d79ec239333a742a30e904e2e15de13c4d36a2b779bca6c5f8f6ea"
+    },
+    {
+      "path": "departments/ogilvy/opt-in-follow-up-email.md",
+      "sha256": "e37d7f7b514738857e7a7c08440762019444b50d7c264a510a1db068afa129c3"
+    },
+    {
+      "path": "departments/ogilvy/acquisition-experiment.md",
+      "sha256": "b619c3cff6c14f73fd06acb1b606c232f3b62720d437a1eb27e57cfc6f869deb"
+    },
+    {
+      "path": "departments/ogilvy/metric-dictionary.md",
+      "sha256": "406037409a4e45f6b701f3057a37c05728a68f864a1b933747aa663d25e9d031"
+    },
+    {
+      "path": "departments/ogilvy/measurement-log.csv",
+      "sha256": "a57118efdcd451aba080855b475a0f06dd74c6c6abf4d4c1cc3f7f6eee5cbde3"
+    },
+    {
+      "path": "departments/ogilvy/participant-observations.csv",
+      "sha256": "41c296baeb5344272f8c31502901b87e561fd570ee0d5ad563dc101a2efc903b"
+    },
+    {
+      "path": "departments/ogilvy/effort-and-spend.csv",
+      "sha256": "a3a01d8ae0e648279e788006c8461cf5537e47c23c9b79559e5901d5b099001b"
+    },
+    {
+      "path": "departments/taleb/review.md",
+      "sha256": "8ad1f98a998d187b0c1d34e97461779fb0097e1f304db7c5d9a17df4e4daa85c"
+    },
+    {
+      "path": "departments/taleb/cost-recomputation.json",
+      "sha256": "9b47d634c8ace3bf397efe76b44a0f7531a8352c068d863725f5c370a9133166"
+    }
+  ]
+}

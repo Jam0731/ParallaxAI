@@ -4,6 +4,14 @@ Reusable skills for independent professionals and small teams. Start with a real
 
 [Browse the Parallax skill collection on Agensi](https://www.agensi.io/creators/jam0731?utm_source=github&utm_medium=repository&utm_campaign=service-page-launch)
 
+## A complete one-person company team
+
+**Product decisions, development, marketing and quality review.** The four Parallax departments worked on one fictional business: they built a working capacity planner, wrote its launch material, found a product defect, repaired it and preserved the work for a later session.
+
+[Open the actual team example](company-team-example/README.md) · [Download the generated planner](company-team-example/ledgerleaf-example.zip)
+
+These are real outputs from a fictional local test. The full team Skill is submitted as **v1.1 of Client Delivery Team** and is awaiting Agensi review; the currently approved marketplace version is still v1.0. The example is free to inspect and does not contain the paid Skill instructions.
+
 ## Start free: check your service page
 
 **Parallax Service Page Check** reviews your copy or HTML for a clear offer, supported claims, practical scope and a contact step that does what it says. You get up to five concrete fixes, with replacement wording where your facts support it. It does not send messages or require a paid purchase.
@@ -16,7 +24,7 @@ Install just this Skill in a Codex project with the [Skills CLI](https://github.
 npx skills add https://github.com/Jam0731/ParallaxAI/tree/main/showcase/free-skills/parallax-service-page-check --agent codex --skill parallax-service-page-check --copy
 ```
 
-Run it from the project where you want the Skill. This command adds one Skill to that project, without installing the gateway or the repository's other skills. You can also copy the `SKILL.md` into a skill location supported by your assistant. The GitHub installation is available now; its separate Agensi listing is awaiting review.
+Run it from the project where you want the Skill. This command adds one Skill to that project, without installing the gateway or the repository's other skills. You can also copy the `SKILL.md` into a skill location supported by your assistant. It is also available free [on Agensi](https://www.agensi.io/skills/parallax-service-page-check?utm_source=github&utm_medium=showcase&utm_campaign=service-page-launch).
 
 ![An actual service-page review with concrete fixes](images/service-page-check.png)
 
@@ -55,7 +63,7 @@ The package is an actual demonstration of **Parallax Course Pilot**. Its 12-minu
 
 - **Write short videos from source material:** [read the full Source-to-Shorts example](source-to-shorts/README.md), including the brief, three spoken scripts and filming notes.
 - **Check a page:** start with the free Service Page Check above.
-- **Build the actual page:** Service Page Builder has been submitted to Agensi for review at a one-time price of USD 14. Its four output examples are available above; the paid listing will be linked here once it is live.
+- **Build the actual page:** [Service Page Builder](https://www.agensi.io/skills/parallax-service-page-builder?utm_source=github&utm_medium=showcase&utm_campaign=service-page-launch) is available for USD 14 once. Inspect its four actual output examples above before buying.
 - **Prepare a lesson:** [Course Pilot](https://www.agensi.io/skills/parallax-course-pilot?utm_source=github&utm_medium=showcase&utm_campaign=service-page-launch) produces teaching text, a worked example, learner practice and a separate answer key.
 - **Clarify the service:** [Offer Stress Test](https://www.agensi.io/skills/parallax-offer-stress-test?utm_source=github&utm_medium=showcase&utm_campaign=service-page-launch) helps work through scope, effort and price assumptions before making a promise to a client.
 

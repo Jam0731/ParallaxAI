@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="A local monthly retainer capacity planner for independent designers.">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self'; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
+  <title>Ledgerleaf — Retainer capacity planner</title>
+  <link rel="icon" href="leaf.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css">
+  <script src="core.js" defer></script>
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <div class="shell">
+    <header class="masthead">
+      <a class="brand" href="#top" aria-label="Ledgerleaf home"><span class="leaf" aria-hidden="true"></span>Ledgerleaf<span class="edition">CAPACITY PLANNER</span></a>
+      <span class="local-badge"><span aria-hidden="true">●</span> Local only · USD</span>
+    </header>
+    <main id="top">
+      <div class="intro">
+        <div><p class="eyebrow">FOR INDEPENDENT DESIGNERS</p><h1>Know what fits<br>before you say yes.</h1><p class="lede">Compare one month of retainer commitments with the hours you can actually give clients.</p></div>
+        <aside class="intro-note"><span class="note-number">01 / MONTH</span><p>A little room to breathe<br>belongs in the plan.</p></aside>
+      </div>
+      <div class="scenario-bar">
+        <div><span class="scenario-dot" aria-hidden="true"></span><strong id="scenario-label">Fictional starter scenario</strong><p id="scenario-description">Example businesses and figures. Replace them with your own plan.</p></div>
+        <div class="actions"><button id="load-example" class="button subtle" type="button">Load fictional example</button><button id="start-blank" class="button subtle" type="button">Start blank</button></div>
+      </div>
+      <div id="notice" class="notice" role="status" aria-live="polite" hidden></div>
+      <section class="panel working-panel" aria-labelledby="working-title">
+        <div class="section-heading"><div><p class="eyebrow">01 / MAKE ROOM</p><h2 id="working-title">Your monthly hours</h2></div><p>Client capacity = total − non-client work − buffer</p></div>
+        <div class="hours-grid">
+          <div class="field"><label for="total-hours">Total working hours</label><div class="input-wrap"><input id="total-hours" type="text" inputmode="decimal" autocomplete="off" aria-describedby="hours-hint total-hours-error"><span>h / month</span></div><small class="field-error" id="total-hours-error"></small></div>
+          <div class="field"><label for="non-client-hours">Non-client work</label><div class="input-wrap"><input id="non-client-hours" type="text" inputmode="decimal" autocomplete="off" aria-describedby="hours-hint non-client-hours-error"><span>h / month</span></div><small class="field-error" id="non-client-hours-error"></small></div>
+          <div class="field"><label for="buffer-hours">Reserved buffer</label><div class="input-wrap"><input id="buffer-hours" type="text" inputmode="decimal" autocomplete="off" aria-describedby="hours-hint buffer-hours-error"><span>h / month</span></div><small class="field-error" id="buffer-hours-error"></small></div>
+        </div>
+        <p class="hint" id="hours-hint">Non-client work includes admin, sales and your own projects. Use 0 when none; blanks are incomplete. Numbers may have up to two decimal places.</p>
+        <p class="error-summary" id="capacity-error" role="alert" hidden></p>
+      </section>
+      <section class="results" aria-label="Scenario summary" aria-live="polite" aria-atomic="true">
+        <div class="metric"><span class="metric-label">Available client capacity</span><strong id="available">—</strong><small>After non-client work and buffer</small></div>
+        <div class="metric"><span class="metric-label">Committed client hours</span><strong id="committed">—</strong><small>Across your listed retainers</small></div>
+        <div class="metric balance" id="balance-card"><span class="metric-label" id="balance-label">Remaining capacity</span><strong id="remaining">—</strong><small id="balance-hint">Room for your next commitment</small></div>
+        <div class="capacity-track" aria-hidden="true"><div id="capacity-fill"></div></div>
+        <p class="capacity-caption" id="capacity-caption"></p>
+      </section>
+      <section class="panel clients-panel" aria-labelledby="clients-title">
+        <div class="section-heading"><div><p class="eyebrow">02 / CHECK COMMITMENTS</p><h2 id="clients-title">Monthly retainers</h2></div><button id="add-client" class="button dark" type="button">+ Add client</button></div>
+        <div class="client-table-head" aria-hidden="true"><span>CLIENT NAME</span><span>HOURS / MONTH</span><span>FEE / MONTH · USD</span><span></span></div>
+        <div id="client-rows"></div>
+        <p id="empty-clients" class="empty-state" hidden>No clients yet. Add a retainer or a prospect to see how it fits.</p>
+        <div class="client-note"><span class="note-icon" aria-hidden="true">↗</span><p><strong>Try a prospect.</strong> In the fictional example, Moss would need 12 hours for USD 900 per month. Add Moss yourself to compare the result.</p></div>
+        <div class="revenue-grid">
+          <div><span class="metric-label">Total monthly fee · USD</span><strong id="revenue">—</strong><small>Revenue from listed retainers, before costs and tax</small></div>
+          <div><span class="metric-label">Effective revenue / committed hour</span><strong id="effective">—</strong><small id="effective-note">Monthly fees ÷ committed client hours</small></div>
+        </div>
+      </section>
+      <section class="save-panel" aria-labelledby="save-title"><div><p class="eyebrow">03 / KEEP YOUR PLAN</p><h2 id="save-title">Your data stays in this browser.</h2><p>Changes save automatically in local storage for this browser profile and this site address. There is no account or cloud backup. Clearing browser data, changing the address or using another browser may hide or remove your saved plan.</p><p id="save-status" class="save-status" role="status"></p></div><div class="save-actions"><button id="export-json" class="button dark" type="button">Export scenario JSON</button><button id="reset-data" class="text-button" type="button">Reset &amp; clear saved scenario</button><small>Reset removes only Ledgerleaf’s saved scenario at this address and clears the current form. Export first if you want a copy. Downloaded files are not deleted.</small></div></section>
+      <details class="instructions"><summary>How to use this planner</summary><ol><li>Choose the fictional example or start blank. Those buttons replace the current scenario; export first to keep a copy.</li><li>Enter total monthly hours, non-client hours and a buffer. Enter 0 explicitly for anything that does not apply.</li><li>Add each client’s name, monthly hours and fee in USD. Use your own estimates; this planner does not track work.</li><li>Add a prospect as another row. Check the remaining or overbooked amount before committing.</li><li>Export the readable JSON file for a backup or handoff. The current version restores automatically from this browser only; JSON file import is not included.</li></ol><p>Fees are revenue, not profit or guaranteed receipts. This is a single-person planning estimate, not payroll, invoicing, timesheets or a team scheduling system.</p></details>
+    </main>
+    <footer><span>Ledgerleaf</span><span>Local prototype · v1.0.1 · No accounts or tracking</span></footer>
+  </div>
+</body>
+</html>

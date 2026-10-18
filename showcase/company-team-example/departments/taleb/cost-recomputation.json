@@ -1,0 +1,47 @@
+{
+  "reviewDate": "2026-10-18",
+  "scope": "Independent recomputation from the raw fictional fixture, Munger brief and Ogilvy experiment; no forecast or customer observation.",
+  "starter": {
+    "availableHours": 84,
+    "committedHours": 78,
+    "remainingHours": 6,
+    "monthlyFeeUSD": 5220,
+    "effectiveRevenuePerCommittedHourUSD": 66.92307692307692
+  },
+  "withMoss": {
+    "committedHours": 90,
+    "availableHours": 84,
+    "overbookedHours": 6,
+    "monthlyFeeUSD": 6120,
+    "effectiveRevenuePerCommittedHourUSD": 68
+  },
+  "withMossBuffer18": {
+    "availableHours": 78,
+    "overbookedHours": 12
+  },
+  "timeBudget": {
+    "weeklyMinutes": 240,
+    "weeklyHours": 4,
+    "twoWeekMinutes": 480,
+    "twoWeekHours": 8,
+    "plannedSessionMinutes": 75,
+    "weekOneObservationAndRepliesMinutes": 120,
+    "weekOneSessionsMinutes": 45,
+    "weekTwoObservationAndRepliesMinutes": 120,
+    "weekTwoSessionsMinutes": 30
+  },
+  "money": {
+    "currency": "USD",
+    "plannedIncrementalCashSpend": 0,
+    "spendCap": 30,
+    "plannedCashHeadroom": 30,
+    "spendingAuthorized": false,
+    "proposedOneTimePrice": 9,
+    "willingnessToPay": "unknown",
+    "toolComputeCost": "not measured",
+    "founderLaborCashValue": "not estimated",
+    "realOrders": "not applicable to this unrun no-checkout experiment",
+    "realRevenue": "unknown; no customer activity run"
+  },
+  "assessment": "Arithmetic correct. The USD30 ceiling is not authorization. USD0 refers to planned incremental cash spending, not zero total economic cost. Time caps are planning constraints, not evidence of actual hours worked. Customer metrics remain empty/unknown, never inferred from these tests."
+}

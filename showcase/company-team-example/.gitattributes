@@ -1,0 +1,2 @@
+# Preserve the byte-identical CSV examples referenced by source-manifest.json.
+departments/ogilvy/*.csv -text

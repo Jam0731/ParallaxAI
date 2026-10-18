@@ -1,0 +1,349 @@
+{
+  "schema": "parallax-company/1",
+  "checkpointVersion": 4,
+  "updatedAt": "2026-10-18T10:31:48.6267734Z",
+  "company": {
+    "id": "ledgerleaf",
+    "name": "Ledgerleaf",
+    "businessMode": "digital-product",
+    "product": "Retainer capacity planner for independent designers",
+    "productVersion": "1.0.1",
+    "status": "local prototype delivered and reviewed; no unresolved blocking finding in inspected scope"
+  },
+  "goals": [
+    "Deliver a working local planner with the complete requested functionality",
+    "Prepare honest finished launch assets and a small validation experiment",
+    "Leave four-department records another session can continue"
+  ],
+  "constraints": {
+    "currency": "USD",
+    "priceHypothesisUSD": 9,
+    "priceModel": "one-time",
+    "validationSpendCapUSD": 30,
+    "spendingAuthorized": false,
+    "founderHoursPerWeekAfterPrototype": 4,
+    "application": "Static local browser app; no backend or external resources",
+    "forbiddenActions": [
+      "account access",
+      "contact or outreach",
+      "public deployment",
+      "real purchase",
+      "payment checkout",
+      "analytics",
+      "automated messages",
+      "application network requests"
+    ],
+    "sourceNotes": "All supplied interview subjects and businesses are fictional and unverified."
+  },
+  "unresolvedAssumptions": [
+    {
+      "id": "A001",
+      "statement": "Independent designers prefer a focused planner enough to choose it over their spreadsheet.",
+      "status": "untested"
+    },
+    {
+      "id": "A002",
+      "statement": "USD 9 one-time is a viable price.",
+      "status": "founder hypothesis; willingness to pay unproven"
+    },
+    {
+      "id": "A003",
+      "statement": "The founder will choose and authorize a suitable opt-in channel after the local review.",
+      "status": "unresolved; no outreach authorized"
+    }
+  ],
+  "departments": {
+    "munger": {
+      "responsibility": "Product and business decisions, dependencies and checkpoint reconciliation",
+      "activeTaskIds": [
+        "LL-M001",
+        "LL-M002"
+      ],
+      "record": "departments/munger/product-offer-brief.md",
+      "worker": "Main worker, sequential department pass"
+    },
+    "woz": {
+      "responsibility": "Engineering implementation, local delivery, checks and technical repairs",
+      "activeTaskIds": [
+        "LL-W001"
+      ],
+      "record": "product/",
+      "worker": "Main worker, sequential department pass"
+    },
+    "ogilvy": {
+      "responsibility": "Customer framing, launch assets, acquisition experiment and measurement",
+      "activeTaskIds": [
+        "LL-O001",
+        "LL-O002"
+      ],
+      "record": "departments/ogilvy/",
+      "worker": "Separate department worker"
+    },
+    "taleb": {
+      "responsibility": "Actual artifact review, meaningful checks, cost arithmetic and claim review",
+      "activeTaskIds": [
+        "LL-T001"
+      ],
+      "record": "departments/taleb/",
+      "worker": "Separate department worker"
+    }
+  },
+  "tasks": [
+    {
+      "id": "LL-M001",
+      "owner": "munger",
+      "requiredOutcome": "A bounded product and offer decision preserving independent designers and all requested functionality",
+      "dependencies": [],
+      "status": "delivered",
+      "artifacts": [
+        "departments/munger/product-offer-brief.md"
+      ],
+      "reviewState": "Taleb local handoff assessment passed; exact inspected versions in departments/taleb/inspected-hashes-final.json"
+    },
+    {
+      "id": "LL-W001",
+      "owner": "woz",
+      "requiredOutcome": "Complete static app with validation, persistence, export, instructions and executed checks",
+      "dependencies": [
+        "LL-M001"
+      ],
+      "status": "delivered",
+      "artifacts": [
+        "product/index.html",
+        "product/styles.css",
+        "product/core.js",
+        "product/app.js",
+        "product/leaf.svg"
+      ],
+      "reviewState": "Taleb local handoff assessment passed; exact inspected versions in departments/taleb/inspected-hashes-final.json",
+      "privateArchiveArtifacts": [
+        "product/README.md",
+        "checks/core-results.json",
+        "checks/browser-results.json",
+        "departments/woz/delivery.md"
+      ]
+    },
+    {
+      "id": "LL-O001",
+      "owner": "ogilvy",
+      "requiredOutcome": "Finished landing-page draft, three distinct launch posts and opt-in follow-up email draft",
+      "dependencies": [
+        "LL-M001"
+      ],
+      "status": "delivered",
+      "artifacts": [
+        "departments/ogilvy/landing-page.md",
+        "departments/ogilvy/launch-posts.md",
+        "departments/ogilvy/opt-in-follow-up-email.md"
+      ],
+      "reviewState": "Taleb local handoff assessment passed; exact inspected versions in departments/taleb/inspected-hashes-final.json"
+    },
+    {
+      "id": "LL-O002",
+      "owner": "ogilvy",
+      "requiredOutcome": "Usable acquisition experiment and empty measurement records within time/spend constraints",
+      "dependencies": [
+        "LL-M001"
+      ],
+      "status": "delivered",
+      "artifacts": [
+        "departments/ogilvy/acquisition-experiment.md",
+        "departments/ogilvy/metric-dictionary.md",
+        "departments/ogilvy/measurement-log.csv",
+        "departments/ogilvy/participant-observations.csv",
+        "departments/ogilvy/effort-and-spend.csv"
+      ],
+      "reviewState": "Taleb local handoff assessment passed; exact inspected versions in departments/taleb/inspected-hashes-final.json"
+    },
+    {
+      "id": "LL-T001",
+      "owner": "taleb",
+      "requiredOutcome": "Inspect actual app and marketing versions, run checks, recompute costs, route defects and recheck repairs",
+      "dependencies": [
+        "LL-W001",
+        "LL-O001",
+        "LL-O002"
+      ],
+      "status": "delivered",
+      "artifacts": [
+        "departments/taleb/review.md",
+        "departments/taleb/cost-recomputation.json"
+      ],
+      "reviewState": "18/18 independent checks passed; T-F01 and T-F02 resolved and rechecked; local delivery only",
+      "privateArchiveArtifacts": [
+        "departments/taleb/handoff.json",
+        "departments/taleb/findings.json",
+        "departments/taleb/independent-check-results.json",
+        "departments/taleb/inspected-hashes-final.json"
+      ]
+    },
+    {
+      "id": "LL-M002",
+      "owner": "munger",
+      "requiredOutcome": "Choose an iteration from genuine eligible observation evidence",
+      "dependencies": [
+        "LL-O002",
+        "LL-T001"
+      ],
+      "status": "planned",
+      "artifacts": [],
+      "reviewState": "future work; observations unknown"
+    }
+  ],
+  "decisions": [
+    {
+      "id": "D001",
+      "owner": "munger",
+      "decision": "Preserve the independent single-designer audience; exclude studio payroll/timesheet/invoice/permissions expansion.",
+      "reason": "Fictional A/B describe the proposed decision; C requests a mismatched studio product.",
+      "source": "assigned fixture and departments/munger/product-offer-brief.md",
+      "status": "current"
+    },
+    {
+      "id": "D002",
+      "owner": "munger",
+      "decision": "Deliver a complete focused static planner and test convenience relative to a spreadsheet.",
+      "reason": "Spreadsheet alternative is supplied; demand and price are unverified, but building this reversible prototype is explicitly authorized.",
+      "source": "assigned fixture",
+      "status": "current"
+    },
+    {
+      "id": "D003",
+      "owner": "woz",
+      "decision": "Use USD, localStorage and readable versioned JSON export.",
+      "reason": "One currency and either readable CSV or JSON satisfies the founder's scope without services or accounts.",
+      "source": "assigned fixture product requirements",
+      "status": "current"
+    },
+    {
+      "id": "D004",
+      "owner": "munger",
+      "decision": "Treat USD 9 as a hypothesis and propose a zero-spend, two-week opt-in validation attempt with at most four hours per week.",
+      "reason": "Spending and contact are not authorized; the founder needs a bounded next experiment rather than invented results.",
+      "source": "assigned fixture business constraints",
+      "status": "current"
+    }
+  ],
+  "growthExperiments": [
+    {
+      "id": "LL-EXP-001",
+      "owner": "ogilvy",
+      "status": "proposed; not run",
+      "audience": "Independent designers who currently manage at least one monthly retainer",
+      "channel": "POST-02 in a permitted independent-design feedback community; exact channel unselected and unauthorized",
+      "offer": "Try the local planner on fictional data and compare it with the current method; USD 9 one-time is a proposed price",
+      "plannedAction": "Use finished launch assets after separate authorization, observe fictional capacity tasks and record reasons and objections",
+      "observationPeriod": "Two weeks after authorized start; dates unset",
+      "measurementRecord": "departments/ogilvy/measurement-log.csv",
+      "participantRecord": "departments/ogilvy/participant-observations.csv",
+      "metricDefinitions": "departments/ogilvy/metric-dictionary.md",
+      "actualResults": null,
+      "unknownIsNotZero": true,
+      "priorCheckpointAlias": "EXP001"
+    }
+  ],
+  "finance": {
+    "currency": "USD",
+    "budgetCap": 30,
+    "externalValidationSpendThisRun": 0,
+    "spendReceipts": [],
+    "proposedSpend": 0,
+    "toolAndComputeCost": "not measured",
+    "proposedPrice": 9,
+    "realPaidOrders": null,
+    "realGrossSales": null,
+    "realRefunds": null,
+    "realNetReceipts": null,
+    "note": "No purchase was attempted. Unknown market outcomes are not zero. Any gross-price arithmetic excludes payment fees, tax and founder time unless stated."
+  },
+  "externalActions": [
+    {
+      "id": "EXT001",
+      "action": "Public deployment",
+      "status": "proposed",
+      "authorization": "not authorized",
+      "receipt": null
+    },
+    {
+      "id": "EXT002",
+      "action": "Post, recruit, follow up or contact customers",
+      "status": "proposed",
+      "authorization": "not authorized",
+      "receipt": null
+    },
+    {
+      "id": "EXT003",
+      "action": "Spend validation budget or charge a buyer",
+      "status": "proposed",
+      "authorization": "not authorized",
+      "receipt": null
+    }
+  ],
+  "localPreview": {
+    "status": "Opened and checked during the local trial; start your own static preview to use the example.",
+    "publicDeployment": false
+  },
+  "artifacts": {
+    "manifest": "source-manifest.json",
+    "versioning": "Product v1.0.1; brief v1; unchanged marketing v1.0; final Taleb assessment in departments/taleb/review.md",
+    "reviewedVersions": "Exact evaluated hashes are retained in the private validation archive; selected unchanged file hashes appear in source-manifest.json.",
+    "priorMarketingHandoff": "Ogilvy handoff v1.0 is preserved as a pre-review snapshot; its pending status is superseded by final Taleb review."
+  },
+  "reviewFindings": [
+    {
+      "id": "T-F01",
+      "severity": "medium",
+      "owner": "woz",
+      "status": "resolved and rechecked",
+      "detectedIn": "product v1.0.0",
+      "title": "Scenario banner falsely claimed a successful local save",
+      "impact": "After Start blank (real browser) or a failed localStorage.setItem (controlled adapter), the scenario description said Saved locally on this device while the save status correctly said no saved scenario or could not save. This could cause a user to leave believing data persisted.",
+      "minimumFix": "Use a neutral description that directs the owner to the actual save status for both blank and custom scenarios.",
+      "repair": "Woz changed the non-fictional scenario description to Your current scenario. Check the save status below. No client information is sent anywhere. Product version became 1.0.1.",
+      "rechecks": [
+        "T-R01 controlled quota-failure adapter passed",
+        "T-R03 removal-failure adapter passed",
+        "Real browser Start blank showed neutral banner and correct removed/not-yet-saved status",
+        "Real browser final footer and actual JSON download identify v1.0.1"
+      ],
+      "evidence": [
+        "departments/taleb/browser-blank-before-repair.txt",
+        "departments/taleb/independent-check-results-before-repair.json",
+        "departments/taleb/browser-blank-after-repair.txt",
+        "departments/taleb/independent-check-results.json",
+        "departments/taleb/ui-export-invalid-v1.0.1.json"
+      ],
+      "finalAppSha256": "6BABE7059EA51C54F69FD30198FE07C31F645048661E13E7BFDB1AB3010F2BED"
+    },
+    {
+      "id": "T-F02",
+      "severity": "low",
+      "owner": "munger",
+      "status": "resolved and rechecked",
+      "detectedIn": "company checkpoint v1",
+      "title": "Experiment identifier did not match finished measurement templates",
+      "impact": "Checkpoint EXP001 and templates LL-EXP-001 could split a later session's measurement records.",
+      "minimumFix": "Use LL-EXP-001 as canonical ID and preserve EXP001 as the prior alias.",
+      "repair": "Main worker had concurrently reconciled checkpoint v2 to LL-EXP-001 with priorCheckpointAlias EXP001.",
+      "rechecks": [
+        "Independently read checkpoint v2 with SHA256 2A7B49F81F1806D9FA22F18FB6BA4C43658B720D079ED51AA2AA783F996F73B3",
+        "Reread checkpoint v3; canonical ID and alias retained"
+      ],
+      "evidence": [
+        "departments/taleb/checkpoint-reference-check.json"
+      ],
+      "note": "Taleb did not edit company.json. Later checkpoint merges are outside this byte-specific reference check."
+    }
+  ],
+  "continuation": {
+    "checkpointWriter": "Main worker",
+    "nextOwners": [
+      "Munger: choose next iteration from genuine authorized observations",
+      "Ogilvy: run only a later authorized acquisition experiment and keep metrics evidence-bounded",
+      "Woz: maintain the product; preserve preview for root acceptance",
+      "Taleb: review future changed versions and their affected checks"
+    ],
+    "instructions": "Read this checkpoint and referenced departmental artifacts. Preserve task and decision IDs. Review state is separate from artifact delivery, public launch and customer acceptance. No future outreach, spend or deployment is authorized by this checkpoint."
+  },
+  "publicExampleNote": "Portable presentation copy: temporary preview address, process handle and internal worker handles removed. Business decisions, tasks and evidence states are preserved. Public artifact paths point to the selected files; privateArchiveArtifacts identifies evidence retained only in the private validation archive."
+}
