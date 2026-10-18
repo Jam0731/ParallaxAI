@@ -10,6 +10,14 @@ Reusable skills for independent professionals and small teams. Start with a real
 
 [Read the free Skill](free-skills/parallax-service-page-check/SKILL.md) · [See an actual review](examples/service-page-review.md)
 
+Install just this Skill in a Codex project with the [Skills CLI](https://github.com/vercel-labs/skills):
+
+```sh
+npx skills add https://github.com/Jam0731/ParallaxAI/tree/main/showcase/free-skills/parallax-service-page-check --agent codex --skill parallax-service-page-check --copy
+```
+
+Run it from the project where you want the Skill. This command adds one Skill to that project, without installing the gateway or the repository's other skills. You can also copy the `SKILL.md` into a skill location supported by your assistant. The GitHub installation is available now; its separate Agensi listing is awaiting review.
+
 ![An actual service-page review with concrete fixes](images/service-page-check.png)
 
 Try it with this request:
@@ -46,7 +54,7 @@ The package is an actual demonstration of **Parallax Course Pilot**. Its 12-minu
 ## Choosing a skill
 
 - **Check a page:** start with the free Service Page Check above.
-- **Build the actual page:** see Service Page Builder in the [Agensi collection](https://www.agensi.io/creators/jam0731?utm_source=github&utm_medium=showcase&utm_campaign=service-page-launch).
+- **Build the actual page:** Service Page Builder has been submitted to Agensi for review at a one-time price of USD 19. Its four output examples are available above; the paid listing will be linked here once it is live.
 - **Prepare a lesson:** Course Pilot produces teaching text, a worked example, learner practice and a separate answer key.
 - **Clarify the service:** Offer Stress Test helps work through scope, effort and price assumptions before making a promise to a client.
 
