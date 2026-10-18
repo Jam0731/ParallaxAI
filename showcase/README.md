@@ -53,10 +53,11 @@ The package is an actual demonstration of **Parallax Course Pilot**. Its 12-minu
 
 ## Choosing a skill
 
+- **Write short videos from source material:** [read the full Source-to-Shorts example](source-to-shorts/README.md), including the brief, three spoken scripts and filming notes.
 - **Check a page:** start with the free Service Page Check above.
 - **Build the actual page:** Service Page Builder has been submitted to Agensi for review at a one-time price of USD 19. Its four output examples are available above; the paid listing will be linked here once it is live.
-- **Prepare a lesson:** Course Pilot produces teaching text, a worked example, learner practice and a separate answer key.
-- **Clarify the service:** Offer Stress Test helps work through scope, effort and price assumptions before making a promise to a client.
+- **Prepare a lesson:** [Course Pilot](https://www.agensi.io/skills/parallax-course-pilot?utm_source=github&utm_medium=showcase&utm_campaign=service-page-launch) produces teaching text, a worked example, learner practice and a separate answer key.
+- **Clarify the service:** [Offer Stress Test](https://www.agensi.io/skills/parallax-offer-stress-test?utm_source=github&utm_medium=showcase&utm_campaign=service-page-launch) helps work through scope, effort and price assumptions before making a promise to a client.
 
 Each listing states its current price, required host capabilities and limits. AI service fees and hosting are separate. The open-source collaboration gateway in this repository and the commercial skill collection are separate products.
 
