@@ -4,13 +4,13 @@ Reusable skills for independent professionals and small teams. Start with a real
 
 [Browse the Parallax skill collection on Agensi](https://www.agensi.io/creators/jam0731?utm_source=github&utm_medium=repository&utm_campaign=service-page-launch)
 
-## A complete one-person company team
+## Parallax One-Person Company
 
-**Product decisions, development, marketing and quality review.** The four Parallax departments worked on one fictional business: they built a working capacity planner, wrote its launch material, found a product defect, repaired it and preserved the work for a later session.
+**Build, launch and run your one-person business.** Parallax connects product decisions, development, marketing, delivery and ongoing improvement. In the fictional example below, it produced a working capacity planner and launch materials, found and repaired a defect, and saved the business records for a later session.
 
-[Open the actual team example](company-team-example/README.md) · [Download the generated planner](company-team-example/ledgerleaf-example.zip)
+[Open the business example](company-team-example/README.md) · [Download the generated planner](company-team-example/ledgerleaf-example.zip)
 
-These are real outputs from a fictional local test. The full team is available as **Parallax One-Person Company: 4-Agent Team (v1.1) — USD 19 once**. [Open the Skill on Agensi](https://www.agensi.io/skills/parallax-one-person-company-4-agent-team?utm_source=github&utm_medium=showcase&utm_campaign=service-page-launch). The example is free to inspect and does not contain the paid Skill instructions.
+These are real outputs from a fictional local test. **Parallax One-Person Company (v1.1) is available for USD 19 once.** [Open the Skill on Agensi](https://www.agensi.io/skills/parallax-one-person-company?utm_source=github&utm_medium=showcase&utm_campaign=service-page-launch). The example is free to inspect and does not contain the paid Skill instructions.
 
 ## Start free: check your service page
 
