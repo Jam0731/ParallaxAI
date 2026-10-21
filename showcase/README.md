@@ -10,7 +10,7 @@ Reusable skills for independent professionals and small teams. Start with a real
 
 [Open the actual team example](company-team-example/README.md) · [Download the generated planner](company-team-example/ledgerleaf-example.zip)
 
-These are real outputs from a fictional local test. The full team is now available as **v1.1 of Parallax Client Delivery Team — USD 19 once**. [Open the approved Skill on Agensi](https://www.agensi.io/skills/parallax-client-delivery-team?utm_source=github&utm_medium=showcase&utm_campaign=service-page-launch). The marketplace still uses the Client Delivery Team name and earlier demo; the example above shows the expanded four-department workflow. The example is free to inspect and does not contain the paid Skill instructions.
+These are real outputs from a fictional local test. The full team is available as **Parallax One-Person Company: 4-Agent Team (v1.1) — USD 19 once**. [Open the Skill on Agensi](https://www.agensi.io/skills/parallax-one-person-company-4-agent-team?utm_source=github&utm_medium=showcase&utm_campaign=service-page-launch). The example is free to inspect and does not contain the paid Skill instructions.
 
 ## Start free: check your service page
 
