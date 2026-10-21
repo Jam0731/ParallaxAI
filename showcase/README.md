@@ -10,13 +10,15 @@ Reusable skills for independent professionals and small teams. Start with a real
 
 [Open the actual team example](company-team-example/README.md) · [Download the generated planner](company-team-example/ledgerleaf-example.zip)
 
-These are real outputs from a fictional local test. The full team Skill is submitted as **v1.1 of Client Delivery Team** and is awaiting Agensi review; the currently approved marketplace version is still v1.0. The example is free to inspect and does not contain the paid Skill instructions.
+These are real outputs from a fictional local test. The full team is now available as **v1.1 of Parallax Client Delivery Team — USD 19 once**. [Open the approved Skill on Agensi](https://www.agensi.io/skills/parallax-client-delivery-team?utm_source=github&utm_medium=showcase&utm_campaign=service-page-launch). The marketplace still uses the Client Delivery Team name and earlier demo; the example above shows the expanded four-department workflow. The example is free to inspect and does not contain the paid Skill instructions.
 
 ## Start free: check your service page
 
 **Parallax Service Page Check** reviews your copy or HTML for a clear offer, supported claims, practical scope and a contact step that does what it says. You get up to five concrete fixes, with replacement wording where your facts support it. It does not send messages or require a paid purchase.
 
-[Read the free Skill](free-skills/parallax-service-page-check/SKILL.md) · [See an actual review](examples/service-page-review.md)
+[Try the free Skill on Agensi](https://www.agensi.io/skills/parallax-service-page-check?utm_source=github&utm_medium=showcase&utm_campaign=service-page-launch) · [Copy a first-use request](free-skills/parallax-service-page-check/README.md#start-with-your-page) · [See an actual review](examples/service-page-review.md)
+
+On Agensi, choose **Copy prompt to install** and paste it into your AI assistant. Once connected, provide your page and the facts behind it. You can also [read the full Skill instructions](free-skills/parallax-service-page-check/SKILL.md) or install a project copy below.
 
 Install just this Skill in a Codex project with the [Skills CLI](https://github.com/vercel-labs/skills):
 

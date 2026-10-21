@@ -6,9 +6,9 @@ Find what makes your service page confusing before you share it. Get up to five 
 
 ## Start with your page
 
-1. Install this Skill in your project using the command below.
-2. Open your skill-capable assistant in that project.
-3. Paste your page copy or HTML, plus the facts you can support. Ask for the review using this starter:
+1. [Open the free Skill on Agensi](https://www.agensi.io/skills/parallax-service-page-check?utm_source=github&utm_medium=example&utm_campaign=service-page-launch), choose **Copy prompt to install**, and paste that prompt into your AI assistant. If you prefer a local project copy, use the command below instead.
+2. After installation, paste your page copy or HTML, plus the facts you can support.
+3. Ask for the review using this starter:
 
 ```text
 Use parallax-service-page-check to review my service page.
