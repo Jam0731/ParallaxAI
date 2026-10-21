@@ -10,7 +10,7 @@ Reusable skills for independent professionals and small teams. Start with a real
 
 [Open the business example](company-team-example/README.md) · [Download the generated planner](company-team-example/ledgerleaf-example.zip)
 
-These are real outputs from a fictional local test. **Parallax One-Person Company (v1.1) is available for USD 19 once.** [Open the Skill on Agensi](https://www.agensi.io/skills/parallax-one-person-company?utm_source=github&utm_medium=showcase&utm_campaign=service-page-launch). The example is free to inspect and does not contain the paid Skill instructions.
+These are real outputs from a fictional local test. **Parallax One-Person Company (v1.2) is available for USD 19 once.** [Open the Skill on Agensi](https://www.agensi.io/skills/parallax-one-person-company?utm_source=github&utm_medium=showcase&utm_campaign=service-page-launch). The example is free to inspect and does not contain the paid Skill instructions.
 
 ## Start free: check your service page
 

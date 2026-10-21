@@ -29,11 +29,11 @@ The lead worker handled Munger and Woz passes; Ogilvy and Taleb each used a sepa
 
 ## Use Parallax One-Person Company
 
-[Get Parallax One-Person Company on Agensi — USD 19 once](https://www.agensi.io/skills/parallax-one-person-company?utm_source=github&utm_medium=example&utm_campaign=service-page-launch). The latest approved package is v1.1, verified on 21 October 2026. The product page shows the business workflow and actual application demo.
+[Get Parallax One-Person Company on Agensi — USD 19 once](https://www.agensi.io/skills/parallax-one-person-company?utm_source=github&utm_medium=example&utm_campaign=service-page-launch). The latest approved package is v1.2, verified on 21 October 2026. The product page shows the business workflow and actual application demo.
 
 After installing the Skill in your assistant, start with:
 
-> Use Parallax One-Person Company v1.1. My business goal is [goal]. Here are my customers, current materials and constraints: [facts]. Decide priorities, produce the working deliverable, prepare the marketing work, inspect the actual results and fix any issues. Save the company records so we can continue later. For this first task, work locally and keep public posting, messages and spending as proposals.
+> Use Parallax One-Person Company v1.2. My business goal is [goal]. Here are my customers, current materials and constraints: [facts]. Decide priorities, produce the working deliverable, prepare the marketing work, inspect the actual results and fix any issues. Save the company records so we can continue later. For this first task, work locally and keep public posting, messages and spending as proposals.
 
 You can also address one department directly, such as **@woz** to implement a change or **@ogilvy** to prepare launch material. The assistant's tools determine which actions it can execute; separate workers are used when the host supports them. Model usage and hosting are separate.
 
